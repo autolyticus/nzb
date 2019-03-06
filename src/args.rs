@@ -19,6 +19,11 @@ Usage:
 Options:
   -h --help     Show this screen.
   --version     Show version.
+
+Commands:
+  inbox View your inbox
+  all View all your tasks
+
 ";
 
 #[derive(Debug, Deserialize)]
