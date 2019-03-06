@@ -10,6 +10,7 @@ const USAGE: &'static str = "
 Nozbe front-end written in Rust.
 
 Usage:
+  nzb
   nzb inbox
   nzb all
   nzb next
@@ -21,8 +22,9 @@ Options:
   --version     Show version.
 
 Commands:
-  inbox View your inbox
-  all View all your tasks
+  all           View all your tasks
+  conky         A conky-friendly, colourful summary of all your tasks
+  inbox         View your inbox
 
 ";
 

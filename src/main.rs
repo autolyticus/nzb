@@ -12,5 +12,6 @@ mod args;
 mod nzb;
 
 pub fn main() {
-    println!("{:?}", args::parse_args());
+    let args = args::parse_args();
+    println!("{:?}", args);
 }
