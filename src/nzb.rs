@@ -19,7 +19,6 @@ mod tests {
     #[test]
     fn it_works() -> Result<()> {
         let data = r#"
-    [
         {
         "_by_user": "j8ML3tmQfiaPiZR7",
         "_comment_count": 1,
@@ -81,14 +80,13 @@ mod tests {
         "time": "0",
         "ts": "1551888406.996968"
         }
-    ]
         "#;
         let t: Task = Task {
             name: "Task name".to_owned(),
             completed: false,
         };
-        let parsed: Vec<Task> = serde_json::from_str(data)?;
-        assert_eq!(t, parsed[0]);
+        let parsed: Task = serde_json::from_str(data)?;
+        assert_eq!(t, parsed);
 
         Ok(())
     }

@@ -1,5 +1,5 @@
 //
-// arg.rs
+// args.rs
 // Copyright (C) 2019 g <g@ABCL>
 // Distributed under terms of the MIT license.
 //
@@ -37,12 +37,4 @@ pub fn parse_args() -> Args {
     Docopt::new(USAGE)
         .and_then(|d| d.deserialize())
         .unwrap_or_else(|e| e.exit())
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {}
 }
