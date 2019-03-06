@@ -8,3 +8,5 @@ edition = "2018"
 reqwest = "*"
 serde_json = "*"
 serde = { version = "*", features=["derive"]}
+serde_derive = "*"
+docopt = "*"
