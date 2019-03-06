@@ -1,6 +1,6 @@
 [package]
-name = "rust"
-version = "0.1.0"
+name = "nzb"
+version = "0.1.1"
 authors = ["reisub0 <reisub0@gmail.com>"]
 edition = "2018"
 
