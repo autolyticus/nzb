@@ -13,8 +13,8 @@ Usage:
   nzb inbox
   nzb all
   nzb next
-  naval_fate.py (-h | --help)
-  naval_fate.py --version
+  nzb (-h | --help)
+  nzb --version
 
 Options:
   -h --help     Show this screen.
