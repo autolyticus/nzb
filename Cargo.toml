@@ -1,0 +1,10 @@
+[package]
+name = "rust"
+version = "0.1.0"
+authors = ["reisub0 <reisub0@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+reqwest = "*"
+serde_json = "*"
+serde = { version = "*", features=["derive"]}
