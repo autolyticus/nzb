@@ -10,29 +10,46 @@ use serde::Serialize;
 struct Task {
     name: String,
     completed: bool,
+    next: bool,
+    _project_name: String,
+    _datetime_s: String,
+    _con_names: Vec<String>,
 }
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn it_works() -> Result<()> {
+    fn test_json_parse_task() -> serde_json::Result<()> {
         let data = r#"
         {
         "_by_user": "j8ML3tmQfiaPiZR7",
         "_comment_count": 1,
-        "_con_icons": [],
-        "_con_icons_char": [],
-        "_con_icons_color": [],
-        "_con_names": [],
+        "_con_icons": [
+            48,
+            48
+        ],
+        "_con_icons_char": [
+            "F",
+            "F"
+        ],
+        "_con_icons_color": [
+            "",
+            ""
+        ],
+        "_con_names": [
+            "home",
+            "self"
+        ],
         "_created_at": "6 Mar 19 18:16",
         "_created_at_org": "2019-03-06 18:16:42",
         "_datedone": "",
         "_datedone_s": "",
-        "_datetime_day_s": null,
-        "_datetime_full_s": "",
-        "_datetime_s": "not set",
-        "_dateweek_s": "not set",
+        "_datetime_day_s": "29 March",
+        "_datetime_full_s": "29 Mar 2019 10:30",
+        "_datetime_s": "29 Mar 10:30",
+        "_dateweek_s": "29 Mar 10:30",
         "_delegation_list": [],
         "_is_evernote_reminder": "",
         "_name_d": "\tTask name",
@@ -68,7 +85,7 @@ mod tests {
         ],
         "completed": false,
         "con_list": [],
-        "datetime": null,
+        "datetime": "2019-03-29 10:30:00",
         "dateweek": null,
         "id": "wmLkkOwiJj4iXp9E",
         "name": "Task name",
@@ -82,7 +99,11 @@ mod tests {
         "#;
         let t: Task = Task {
             name: "Task name".to_owned(),
+            _project_name: "Music".to_owned(),
             completed: false,
+            next: false,
+            _datetime_s: "29 Mar 10:30".to_owned(),
+            _con_names: vec!["home".to_owned(), "self".to_owned()],
         };
         let parsed: Task = serde_json::from_str(data)?;
         assert_eq!(t, parsed);
