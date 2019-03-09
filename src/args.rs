@@ -11,8 +11,8 @@ Nozbe front-end written in Rust.
 
 Usage:
   nzb
-  nzb inbox
   nzb all
+  nzb inbox
   nzb next
   nzb (-h | --help)
   nzb --version
