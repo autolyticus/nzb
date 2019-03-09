@@ -18,13 +18,14 @@ Usage:
   nzb --version
 
 Options:
-  -h --help     Show this screen.
-  --version     Show version.
+  --auth <token>   Specify the Nozbe authentication token (Refer Nozbe API Documentation)
+  -h --help        Show this screen.
+  --version        Show version.
 
 Commands:
-  all           View all your tasks
-  conky         A conky-friendly, colourful summary of all your tasks
-  inbox         View your inbox
+  all              View all your tasks
+  conky            A conky-friendly, colourful summary of all your tasks
+  inbox            View your inbox
 
 ";
 
