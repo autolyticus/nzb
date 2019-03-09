@@ -56,6 +56,35 @@ pub fn get_inbox() -> Result<Vec<Task>, Box<std::error::Error>> {
         .collect())
 }
 
+use prettytable::{format, Row, Table};
+pub fn print_tasks(tasks: Vec<Task>) -> Result<(), Box<std::error::Error>> {
+    let mut table = Table::new();
+    for task in tasks {
+        table.add_row(row![
+            format!(
+                "{} {}",
+                task.name,
+                if task.due == "not set" {
+                    String::new()
+                } else {
+                    format!("[{}]", task.due)
+                }
+            ),
+            if task.next { "★" } else { "☆" }
+        ]);
+    }
+    table.set_format(format::FormatBuilder::new().padding(0, 10).build());
+    table.printstd();
+    Ok(())
+}
+
+pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
+    let inbox = get_inbox()?;
+    println!("INBOX:");
+    print_tasks(inbox)?;
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
