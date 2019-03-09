@@ -11,9 +11,49 @@ struct Task {
     name: String,
     completed: bool,
     next: bool,
-    _project_name: String,
-    _datetime_s: String,
-    _con_names: Vec<String>,
+    #[serde(rename = "_project_name")]
+    project: String,
+
+    #[serde(rename = "_datetime_s")]
+    due: String,
+
+    #[serde(rename = "_con_names")]
+    categories: Vec<String>,
+}
+
+use std::fs::File;
+use std::io::prelude::*;
+
+fn get_auth_token() -> Result<String, Box<std::error::Error>> {
+    let mut file = File::open(
+        dirs::home_dir()
+            .unwrap_or_default()
+            .to_str()
+            .unwrap_or_default()
+            .to_owned()
+            + "/.local/.nozbe_token",
+    )?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    // Remove EOL
+    contents.pop();
+    Ok(contents)
+}
+
+fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
+    Ok(reqwest::Client::new()
+        .get("https://api.nozbe.com:3000/list")
+        .header("Authorization", get_auth_token()?.as_ref(): &str)
+        .form(&[("type", "task")])
+        .send()?
+        .json()?)
+}
+
+pub fn get_inbox() -> Result<Vec<Task>, Box<std::error::Error>> {
+    Ok(get_tasks()?
+        .into_iter()
+        .filter(|x| x.project == "Inbox")
+        .collect())
 }
 
 #[cfg(test)]
