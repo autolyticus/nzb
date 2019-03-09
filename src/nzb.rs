@@ -7,7 +7,7 @@ use serde::Deserialize;
 use serde::Serialize;
 
 #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
-struct Task {
+pub struct Task {
     name: String,
     completed: bool,
     next: bool,
