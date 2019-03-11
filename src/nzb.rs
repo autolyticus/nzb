@@ -54,13 +54,6 @@ fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
         .expect("Invalid authentication?"))
 }
 
-fn get_inbox() -> Result<Vec<Task>, Box<std::error::Error>> {
-    Ok(get_tasks()?
-        .into_iter()
-        .filter(|x| x.project == "Inbox")
-        .collect())
-}
-
 fn add_tasks_to_table(table: &mut prettytable::Table, tasks: &Vec<&Task>) {
     for task in tasks {
         table.add_row(row![
@@ -108,7 +101,10 @@ pub fn print_all() -> Result<(), Box<std::error::Error>> {
 }
 
 pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
-    let inbox = get_inbox()?;
+    let inbox = get_tasks()?
+        .into_iter()
+        .filter(|x| x.project == "Inbox")
+        .collect();
     print_tasks_grouped(&inbox);
     Ok(())
 }
