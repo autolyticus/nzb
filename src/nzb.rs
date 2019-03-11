@@ -76,15 +76,40 @@ fn add_tasks_to_table(table: &mut prettytable::Table, tasks: &Vec<&Task>) {
             if task.next { "★" } else { "☆" }
         ]);
     }
-    table.set_format(format::FormatBuilder::new().padding(0, 10).build());
+}
+
+fn print_tasks_grouped(tasks: &Vec<Task>) {
+    let mut projects = std::collections::BTreeMap::new();
+    for task in tasks {
+        projects
+            .entry(task.project.to_uppercase())
+            .or_insert_with(Vec::new)
+            .push(task);
+    }
+
+    let mut table = prettytable::Table::new();
+    for (project, tasks) in projects.into_iter() {
+        table.add_row(row![format!("{} ({})", project, tasks.iter().len())]);
+        add_tasks_to_table(&mut table, &tasks);
+        table.add_row(row![]);
+    }
+    table.set_format(
+        prettytable::format::FormatBuilder::new()
+            .padding(0, 10)
+            .build(),
+    );
     table.printstd();
+}
+
+pub fn print_all() -> Result<(), Box<std::error::Error>> {
+    let all = get_tasks()?;
+    print_tasks_grouped(&all);
     Ok(())
 }
 
 pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
     let inbox = get_inbox()?;
-    println!("INBOX:");
-    print_tasks(inbox)?;
+    print_tasks_grouped(&inbox);
     Ok(())
 }
 
