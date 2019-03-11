@@ -50,7 +50,8 @@ fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
         .header("Authorization", get_auth_token()?.as_ref(): &str)
         .form(&[("type", "task")])
         .send()?
-        .json()?)
+        .json()
+        .expect("Invalid authentication?"))
 }
 
 pub fn get_inbox() -> Result<Vec<Task>, Box<std::error::Error>> {
