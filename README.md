@@ -13,7 +13,7 @@ Make sure you have the latest (stable) versions of Cargo and/or Rustup installed
 Then, simply run
 
 ```bash
-cargo install
+cargo install --path=.
 ```
 
 in the base directory.
