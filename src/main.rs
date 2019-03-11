@@ -28,7 +28,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::All => nzb::print_all()?,
             args::Command::Conky => unimplemented!(),
             args::Command::Inbox => nzb::print_inbox()?,
-            args::Command::Next => unimplemented!(),
+            args::Command::Next => nzb::print_next()?,
         }
     } else {
         // Default action = Print all

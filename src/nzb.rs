@@ -113,6 +113,12 @@ pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
     Ok(())
 }
 
+pub fn print_next() -> Result<(), Box<std::error::Error>> {
+    let next = get_tasks()?.into_iter().filter(|x| x.next).collect();
+    print_tasks_grouped(&next);
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
