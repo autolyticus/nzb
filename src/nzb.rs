@@ -3,11 +3,11 @@
 // Copyright (C) 2019 g <g@ABCL>
 // Distributed under terms of the MIT license.
 //
-use serde::Deserialize;
-use serde::Serialize;
 
-#[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
-pub struct Task {
+pub static mut TOKEN: &str = "";
+
+#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+struct Task {
     name: String,
     completed: bool,
     next: bool,
@@ -21,13 +21,17 @@ pub struct Task {
     categories: Vec<String>,
 }
 
-use std::fs::File;
-use std::io::prelude::*;
-
 fn get_auth_token() -> Result<String, Box<std::error::Error>> {
+    use std::fs::File;
+    use std::io::prelude::*;
+    unsafe {
+        if TOKEN != "" {
+            return Ok(TOKEN.to_owned());
+        }
+    }
     let mut file = File::open(
         dirs::home_dir()
-            .unwrap_or_default()
+            .unwrap()
             .to_str()
             .unwrap_or_default()
             .to_owned()
@@ -35,7 +39,7 @@ fn get_auth_token() -> Result<String, Box<std::error::Error>> {
     )?;
     let mut contents = String::new();
     file.read_to_string(&mut contents)?;
-    // Remove EOL
+    // Remove EOL (\n)
     contents.pop();
     Ok(contents)
 }
