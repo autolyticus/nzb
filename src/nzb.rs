@@ -60,6 +60,24 @@ pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
         .collect())
 }
 
+pub fn add_task(name: String) -> Result<(), Box<std::error::Error>> {
+    if reqwest::Client::new()
+        .post(&format!("{}/task", URL))
+        .header("Authorization", get_auth_token()?.as_ref(): &str)
+        .form(&[("name", name)])
+        .send()?
+        .status()
+        .is_success()
+    {
+        Ok(())
+    } else {
+        Err("Status code: Failure. Invalid authentication?")?
+    }
+    // .json::<Task>()
+    // .expect("Invalid authentication?"));
+    // Ok(())
+}
+
 pub fn star((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::error::Error>> {
     if indices.is_empty() {
         return Ok(());

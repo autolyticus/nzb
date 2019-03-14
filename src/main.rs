@@ -30,6 +30,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
     }
     if let Some(x) = a.arg_command {
         match x {
+            args::Command::Add => nzb::add_task(a.arg_args.join(" "))?,
             args::Command::All => disp::print_all()?,
             args::Command::Conky => disp::print_conky()?,
             args::Command::Done => {

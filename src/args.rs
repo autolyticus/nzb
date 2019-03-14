@@ -20,6 +20,7 @@ Options:
   -V --version                 Show version
 
 Commands:
+  add                          Add a task to your Nozbe Inbox
   all                          View all your tasks (This is the default action)
   conky                        A conky-friendly, colourful summary of all your tasks
   done                         Mark a task as done
@@ -39,6 +40,7 @@ pub struct Args {
 
 #[derive(Debug, Deserialize)]
 pub enum Command {
+    Add,
     All,
     Conky,
     Done,
