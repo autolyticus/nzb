@@ -35,7 +35,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::Done => {
                 nzb::mark_done(ui::picker(
                     a.arg_args,
-                    "Select a task to mark as done (Multi-select w/ TAB) >> ",
+                    "Select task(s) to mark as done (Multi-select w/ TAB) >> ",
                 )?)?;
             }
             args::Command::Help => args::print_help(),
@@ -50,7 +50,12 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::Now | args::Command::Priority | args::Command::Starred => {
                 disp::print_now()?
             }
-            args::Command::Star => disp::print_now()?,
+            args::Command::Star => {
+                nzb::mark_done(ui::picker(
+                    a.arg_args,
+                    "Select task(s) to star (Multi-select w/ TAB) >> ",
+                )?)?;
+            }
         }
     } else {
         // Default action = Print all
