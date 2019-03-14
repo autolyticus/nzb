@@ -23,6 +23,7 @@ Commands:
   all                          View all your tasks (This is the default action)
   conky                        A conky-friendly, colourful summary of all your tasks
   help                         Show this screen
+  list [<list>...]             Show specific lists
   inbox                        View your inbox
   now                          View starred tasks
   starred                      View starred tasks
@@ -41,6 +42,7 @@ pub enum Command {
     Conky,
     Help,
     Inbox,
+    List,
     Now,
     Starred,
 }

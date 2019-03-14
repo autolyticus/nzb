@@ -65,6 +65,20 @@ pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
     Ok(())
 }
 
+pub fn print_lists(lists: Vec<String>) -> Result<(), Box<std::error::Error>> {
+    let tasks = get_tasks()?;
+    for list in lists {
+        print_tasks_grouped(
+            &tasks
+                .clone()
+                .into_iter()
+                .filter(|x| x.project.eq_ignore_ascii_case(&list))
+                .collect::<Vec<_>>(),
+        );
+    }
+    Ok(())
+}
+
 pub fn print_now() -> Result<(), Box<std::error::Error>> {
     let now = &get_tasks()?
         .into_iter()

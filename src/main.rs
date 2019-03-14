@@ -30,6 +30,13 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::Conky => disp::print_conky()?,
             args::Command::Help => args::print_help(),
             args::Command::Inbox => disp::print_inbox()?,
+            args::Command::List => {
+                if a.arg_args.is_empty() {
+                    disp::print_all()?
+                } else {
+                    disp::print_lists(a.arg_args)?
+                }
+            }
             args::Command::Now => disp::print_now()?,
             args::Command::Starred => disp::print_now()?,
         }
