@@ -47,17 +47,17 @@ pub fn get_auth_token() -> Result<String, Box<std::error::Error>> {
 }
 
 pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
-    Ok(reqwest::Client::new()
+    let tasks = reqwest::Client::new()
         .get(&format!("{}/list", URL))
         .header("Authorization", get_auth_token()?.as_ref(): &str)
         .form(&[("type", "task")])
         .send()?
-        .json::<Vec<Task>>()
-        .expect("Invalid authentication?")
-        .iter()
-        .filter(|x| x.completed == false)
-        .cloned()
-        .collect())
+        .json::<Vec<Task>>();
+    if let Ok(x) = tasks {
+        Ok(x.iter().filter(|x| x.completed == false).cloned().collect())
+    } else {
+        Err("Failed parsing JSON response. Invalid authentication?")?
+    }
 }
 
 pub fn add_task(name: String) -> Result<(), Box<std::error::Error>> {
@@ -73,9 +73,6 @@ pub fn add_task(name: String) -> Result<(), Box<std::error::Error>> {
     } else {
         Err("Status code: Failure. Invalid authentication?")?
     }
-    // .json::<Task>()
-    // .expect("Invalid authentication?"));
-    // Ok(())
 }
 
 pub fn star((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::error::Error>> {
