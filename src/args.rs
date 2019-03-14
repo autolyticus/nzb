@@ -16,8 +16,8 @@ Usage:
 
 Options:
   -a <token> --auth=<token>    Specify the Nozbe authentication token (Refer Nozbe API Documentation)
-  -h --help                   Show this screen.
-  -V --version                    Show version.
+  -h --help                    Show this screen.
+  -V --version                 Show version.
 
 Commands:
   all                          View all your tasks (This is the default action)
