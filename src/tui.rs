@@ -15,7 +15,6 @@ pub fn picker(
         .multi(true)
         .prompt(prompt)
         .query(&query);
-    // .reverse(true);
     let task_string = tasks
         .iter()
         .cloned()
