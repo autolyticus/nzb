@@ -180,12 +180,13 @@ mod tests {
         ]
         "#;
         let t: Vec<Task> = vec![Task {
-            name: "Task name".to_owned(),
-            project: "Music".to_owned(),
-            completed: false,
-            now: false,
-            due: "29 Mar 10:30".to_owned(),
             categories: vec!["home".to_owned(), "self".to_owned()],
+            completed: false,
+            due: "29 Mar 10:30".to_owned(),
+            id: "wmLkkOwiJj4iXp9E".to_owned(),
+            name: "Task name".to_owned(),
+            now: false,
+            project: "Music".to_owned(),
         }];
         let parsed: Vec<Task> = serde_json::from_str(data)?;
         assert_eq!(t, parsed);
