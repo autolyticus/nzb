@@ -110,7 +110,7 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
         table.add_row(row![hr, red]);
     } else {
         table.add_row(row![
-            "STAR SOME TASKS TO MARK THEM AS YOUR 1-NOW TASKS",
+            "To have tasks show up here, please STAR them to mark them as NOW tasks",
             red
         ]);
         table.add_empty_row();
