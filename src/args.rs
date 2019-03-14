@@ -22,6 +22,7 @@ Options:
 Commands:
   all                          View all your tasks (This is the default action)
   conky                        A conky-friendly, colourful summary of all your tasks
+  done                         Mark a task as done
   help                         Show this screen
   list [<list>...]             Show specific lists
   inbox                        View your inbox
@@ -40,6 +41,7 @@ pub struct Args {
 pub enum Command {
     All,
     Conky,
+    Done,
     Help,
     Inbox,
     List,

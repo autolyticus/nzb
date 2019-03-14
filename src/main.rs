@@ -14,6 +14,7 @@ extern crate prettytable;
 
 mod args;
 mod disp;
+mod done;
 mod nzb;
 
 pub fn main() -> Result<(), Box<std::error::Error>> {
@@ -28,6 +29,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
         match x {
             args::Command::All => disp::print_all()?,
             args::Command::Conky => disp::print_conky()?,
+            args::Command::Done => done::done(a.arg_args)?,
             args::Command::Help => args::print_help(),
             args::Command::Inbox => disp::print_inbox()?,
             args::Command::List => {
