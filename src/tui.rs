@@ -3,12 +3,12 @@
 // Copyright (C) 2019 g <g@ABCL>
 // Distributed under terms of the MIT license.
 //
-use super::nzb::{get_tasks, Task};
+use super::nzb::Task;
 pub fn picker(
+    tasks: Vec<Task>,
     args: Vec<String>,
     prompt: &str,
 ) -> Result<(Vec<Task>, Vec<usize>), Box<std::error::Error>> {
-    let tasks = get_tasks()?;
     let query = args.join("");
     let options = skim::SkimOptions::default()
         .height("10%")
