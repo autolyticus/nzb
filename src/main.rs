@@ -13,6 +13,7 @@ extern crate serde_derive;
 extern crate prettytable;
 
 mod args;
+mod disp;
 mod nzb;
 
 pub fn main() -> Result<(), Box<std::error::Error>> {
@@ -25,14 +26,14 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
     }
     if let Some(x) = a.arg_command {
         match x {
-            args::Command::All => nzb::print_all()?,
-            args::Command::Conky => nzb::print_conky()?,
-            args::Command::Inbox => nzb::print_inbox()?,
-            args::Command::Next => nzb::print_next()?,
+            args::Command::All => disp::print_all()?,
+            args::Command::Conky => disp::print_conky()?,
+            args::Command::Inbox => disp::print_inbox()?,
+            args::Command::Next => disp::print_now()?,
         }
     } else {
         // Default action = Print all
-        nzb::print_all()?;
+        disp::print_all()?;
         // unimplemented!();
     }
     Ok(())
