@@ -3,20 +3,7 @@
 // Copyright (C) 2019 g <g@ABCL>
 // Distributed under terms of the MIT license.
 //
-use super::nzb::{get_auth_token, Task};
-
-fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
-    Ok(reqwest::Client::new()
-        .get("https://api.nozbe.com:3000/list")
-        .header("Authorization", get_auth_token()?.as_ref(): &str)
-        .form(&[("type", "task")])
-        .send()?
-        .json::<Vec<Task>>()
-        .expect("Invalid authentication?")
-        .into_iter()
-        .filter(|x| x.completed == false)
-        .collect())
-}
+use super::nzb::{get_tasks, Task};
 
 fn add_project_to_table(table: &mut prettytable::Table, project: &str, tasks: &[Task]) {
     table.add_row(row![format!("{} ({})", project, tasks.iter().len())]);

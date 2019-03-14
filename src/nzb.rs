@@ -46,6 +46,19 @@ pub fn get_auth_token() -> Result<String, Box<std::error::Error>> {
     Ok(contents)
 }
 
+pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
+    Ok(reqwest::Client::new()
+        .get("https://api.nozbe.com:3000/list")
+        .header("Authorization", get_auth_token()?.as_ref(): &str)
+        .form(&[("type", "task")])
+        .send()?
+        .json::<Vec<Task>>()
+        .expect("Invalid authentication?")
+        .into_iter()
+        .filter(|x| x.completed == false)
+        .collect())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
