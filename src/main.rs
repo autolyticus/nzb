@@ -67,7 +67,6 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
     } else {
         // Default action = Print all
         disp::print_all()?;
-        // unimplemented!();
     }
     Ok(())
 }
