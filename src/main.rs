@@ -51,7 +51,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
                 disp::print_now()?
             }
             args::Command::Star => {
-                nzb::mark_done(ui::picker(
+                nzb::star(ui::picker(
                     a.arg_args,
                     "Select task(s) to star (Multi-select w/ TAB) >> ",
                 )?)?;
