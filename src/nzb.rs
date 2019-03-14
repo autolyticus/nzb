@@ -4,6 +4,7 @@
 // Distributed under terms of the MIT license.
 //
 
+static URL: &str = "https://api.nozbe.com:3000";
 pub static mut TOKEN: &str = "";
 
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -47,7 +48,7 @@ pub fn get_auth_token() -> Result<String, Box<std::error::Error>> {
 
 pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
     Ok(reqwest::Client::new()
-        .get("https://api.nozbe.com:3000/list")
+        .get(&format!("{}/list", URL))
         .header("Authorization", get_auth_token()?.as_ref(): &str)
         .form(&[("type", "task")])
         .send()?
