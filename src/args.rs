@@ -29,6 +29,7 @@ Commands:
   list [<list>...]             Show specific lists
   now | priority | starred     View starred tasks
   star                         Star a task
+  unstar                       Unstar a task
 ";
 
 #[derive(Debug, Deserialize)]
@@ -51,6 +52,7 @@ pub enum Command {
     Priority,
     Star,
     Starred,
+    Unstar,
 }
 
 pub fn parse_args() -> Args {

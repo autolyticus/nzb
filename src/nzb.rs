@@ -96,6 +96,27 @@ pub fn star((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::er
     Ok(())
 }
 
+pub fn unstar((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::error::Error>> {
+    if indices.is_empty() {
+        return Ok(());
+    }
+    let processed: Vec<_> = indices
+        .iter()
+        .map(|&index| {
+            json!({
+                "id": tasks[index].id,
+                "next": false
+            })
+        })
+        .collect();
+    reqwest::Client::new()
+        .put(&format!("{}/json/task", URL))
+        .header("Authorization", get_auth_token()?.as_ref(): &str)
+        .json(&processed)
+        .send()?;
+    Ok(())
+}
+
 pub fn mark_done((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::error::Error>> {
     if indices.is_empty() {
         return Ok(());

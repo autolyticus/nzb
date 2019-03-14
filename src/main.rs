@@ -57,6 +57,12 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
                     "Select task(s) to star (Multi-select w/ TAB) >> ",
                 )?)?;
             }
+            args::Command::Unstar => {
+                nzb::unstar(tui::picker(
+                    a.arg_args,
+                    "Select task(s) to unstar (Multi-select w/ TAB) >> ",
+                )?)?;
+            }
         }
     } else {
         // Default action = Print all
