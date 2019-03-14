@@ -8,19 +8,18 @@ pub static mut TOKEN: &str = "";
 
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct Task {
-    pub name: String,
+    #[serde(rename = "_con_names")]
+    pub categories: Vec<String>,
     pub completed: bool,
-    #[serde(rename = "next")]
+    #[serde(rename = "_datetime_s")]
+    pub due: String,
+    pub id: String,
+    pub name: String,
     // Starred Tasks = Chosen for 1-NOW
+    #[serde(rename = "next")]
     pub now: bool,
     #[serde(rename = "_project_name")]
     pub project: String,
-
-    #[serde(rename = "_datetime_s")]
-    pub due: String,
-
-    #[serde(rename = "_con_names")]
-    pub categories: Vec<String>,
 }
 
 pub fn get_auth_token() -> Result<String, Box<std::error::Error>> {
