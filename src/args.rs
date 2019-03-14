@@ -27,6 +27,7 @@ Commands:
   inbox                        View your inbox
   list [<list>...]             Show specific lists
   now | priority | starred     View starred tasks
+  star                         Star a task
 ";
 
 #[derive(Debug, Deserialize)]
@@ -46,6 +47,7 @@ pub enum Command {
     List,
     Now,
     Priority,
+    Star,
     Starred,
 }
 

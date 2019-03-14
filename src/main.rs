@@ -50,6 +50,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::Now | args::Command::Priority | args::Command::Starred => {
                 disp::print_now()?
             }
+            args::Command::Star => disp::print_now()?,
         }
     } else {
         // Default action = Print all
