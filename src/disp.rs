@@ -58,7 +58,8 @@ pub fn print_all() -> Result<(), Box<std::error::Error>> {
 pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
     print_tasks_grouped(
         &get_tasks()?
-            .into_iter()
+            .iter()
+            .cloned()
             .filter(|x| x.project == "Inbox")
             .collect::<Vec<_>>(),
     );
@@ -70,8 +71,8 @@ pub fn print_lists(lists: Vec<String>) -> Result<(), Box<std::error::Error>> {
     for list in lists {
         print_tasks_grouped(
             &tasks
-                .clone()
-                .into_iter()
+                .iter()
+                .cloned()
                 .filter(|x| x.project.eq_ignore_ascii_case(&list))
                 .collect::<Vec<_>>(),
         );
@@ -81,7 +82,8 @@ pub fn print_lists(lists: Vec<String>) -> Result<(), Box<std::error::Error>> {
 
 pub fn print_now() -> Result<(), Box<std::error::Error>> {
     let now = &get_tasks()?
-        .into_iter()
+        .iter()
+        .cloned()
         .filter(|x| x.now)
         .collect::<Vec<_>>();
     print_tasks_grouped(&now);
@@ -97,14 +99,18 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
     let alignc = "${alignc}";
     let default = "${color7}";
     let mut table = prettytable::Table::new();
-    let now: Vec<_> = all.clone().into_iter().filter(|x| x.now).collect();
+    let now: Vec<_> = all.iter().cloned().filter(|x| x.now).collect();
     let next: Vec<_> = all
-        .clone()
-        .into_iter()
+        .iter()
+        .cloned()
         .filter(|x| x.project == "2-Next")
         .filter(|x| x.now == false)
         .collect();
-    let side: Vec<_> = all.into_iter().filter(|x| x.project == "Side").collect();
+    let side: Vec<_> = all
+        .iter()
+        .cloned()
+        .filter(|x| x.project == "Side")
+        .collect();
     if !now.is_empty() {
         table.add_row(row![format!("{}{}\t\t1-NOW{}", yellow, alignc, hr)]);
         add_tasks_grouped(&mut table, &now);
