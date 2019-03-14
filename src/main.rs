@@ -17,8 +17,8 @@ extern crate skim;
 
 mod args;
 mod disp;
-mod done;
 mod nzb;
+mod ui;
 
 pub fn main() -> Result<(), Box<std::error::Error>> {
     let a = args::parse_args();
@@ -32,7 +32,12 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
         match x {
             args::Command::All => disp::print_all()?,
             args::Command::Conky => disp::print_conky()?,
-            args::Command::Done => done::done(a.arg_args)?,
+            args::Command::Done => {
+                nzb::mark_done(ui::picker(
+                    a.arg_args,
+                    "Select a task to mark as done (Multi-select w/ TAB) >> ",
+                )?)?;
+            }
             args::Command::Help => args::print_help(),
             args::Command::Inbox => disp::print_inbox()?,
             args::Command::List => {
