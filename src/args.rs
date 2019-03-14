@@ -6,8 +6,7 @@
 
 use docopt::Docopt;
 
-const USAGE: &'static str = "
-Nozbe front-end written in Rust.
+const USAGE: &'static str = "Nozbe front-end written in Rust.
 
 Usage:
   nzb [options] [<command> [<args>...]]
