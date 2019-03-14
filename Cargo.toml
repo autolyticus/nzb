@@ -1,6 +1,6 @@
 [package]
 name = "nzb"
-version = "0.1.2"
+version = "0.1.5"
 authors = ["reisub0 <reisub0@gmail.com>"]
 edition = "2018"
 
