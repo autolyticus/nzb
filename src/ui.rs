@@ -17,8 +17,8 @@ pub fn picker(
         .query(&query);
     // .reverse(true);
     let task_string = tasks
-        .clone()
-        .into_iter()
+        .iter()
+        .cloned()
         .map(|x| x.name)
         .collect::<Vec<_>>()
         .join("\n");
@@ -29,7 +29,8 @@ pub fn picker(
     Ok((
         tasks,
         selected_items
-            .into_iter()
+            .iter()
+            .cloned()
             .map(|x| x.get_index())
             .collect::<Vec<_>>(),
     ))
