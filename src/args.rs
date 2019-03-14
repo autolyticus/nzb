@@ -24,10 +24,9 @@ Commands:
   conky                        A conky-friendly, colourful summary of all your tasks
   done                         Mark a task as done
   help                         Show this screen
-  list [<list>...]             Show specific lists
   inbox                        View your inbox
-  now                          View starred tasks
-  starred                      View starred tasks
+  list [<list>...]             Show specific lists
+  now | priority | starred     View starred tasks
 ";
 
 #[derive(Debug, Deserialize)]
@@ -46,6 +45,7 @@ pub enum Command {
     Inbox,
     List,
     Now,
+    Priority,
     Starred,
 }
 

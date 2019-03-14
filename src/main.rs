@@ -39,8 +39,9 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
                     disp::print_lists(a.arg_args)?
                 }
             }
-            args::Command::Now => disp::print_now()?,
-            args::Command::Starred => disp::print_now()?,
+            args::Command::Now | args::Command::Priority | args::Command::Starred => {
+                disp::print_now()?
+            }
         }
     } else {
         // Default action = Print all
