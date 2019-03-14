@@ -28,6 +28,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
         match x {
             args::Command::All => disp::print_all()?,
             args::Command::Conky => disp::print_conky()?,
+            args::Command::Help => args::print_help(),
             args::Command::Inbox => disp::print_inbox()?,
             args::Command::Next => disp::print_now()?,
         }

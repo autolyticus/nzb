@@ -22,6 +22,7 @@ Options:
 Commands:
   all                          View all your tasks (This is the default action)
   conky                        A conky-friendly, colourful summary of all your tasks
+  help                         Show this screen
   inbox                        View your inbox
   next                         View next(starred) tasks
 ";
@@ -37,6 +38,7 @@ pub struct Args {
 pub enum Command {
     All,
     Conky,
+    Help,
     Inbox,
     Next,
 }
@@ -48,4 +50,8 @@ pub fn parse_args() -> Args {
         .version(Some("Nzb: A Nozbe client (v0.1.1)".to_owned()))
         .deserialize()
         .unwrap_or_else(|e| e.exit())
+}
+
+pub fn print_help() {
+    print!("{}", USAGE);
 }
