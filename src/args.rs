@@ -16,6 +16,7 @@ Usage:
 
 Options:
   -a <token> --auth=<token>    Specify the Nozbe authentication token (Refer Nozbe API Documentation)
+                               (Note: The default authentication token is assumed to be at $HOME/.local/.nozbe_token)
   -h --help                    Show this screen.
   -V --version                 Show version.
 
