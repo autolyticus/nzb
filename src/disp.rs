@@ -112,7 +112,8 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
         .filter(|x| x.project == "Side")
         .collect();
     if !now.is_empty() {
-        table.add_row(row![format!("{}{}\t\t1-NOW{}", yellow, alignc, hr)]);
+        table.add_row(row![format!("{}{}\t\t1-NOW", yellow, alignc)]);
+        table.add_row(row![hr]);
         add_tasks_grouped(&mut table, &now);
         table.add_row(row![hr, red]);
     } else {
