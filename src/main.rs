@@ -30,7 +30,8 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::Conky => disp::print_conky()?,
             args::Command::Help => args::print_help(),
             args::Command::Inbox => disp::print_inbox()?,
-            args::Command::Next => disp::print_now()?,
+            args::Command::Now => disp::print_now()?,
+            args::Command::Starred => disp::print_now()?,
         }
     } else {
         // Default action = Print all

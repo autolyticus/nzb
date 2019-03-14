@@ -24,7 +24,8 @@ Commands:
   conky                        A conky-friendly, colourful summary of all your tasks
   help                         Show this screen
   inbox                        View your inbox
-  next                         View next(starred) tasks
+  now                          View starred tasks
+  starred                      View starred tasks
 ";
 
 #[derive(Debug, Deserialize)]
@@ -40,7 +41,8 @@ pub enum Command {
     Conky,
     Help,
     Inbox,
-    Next,
+    Now,
+    Starred,
 }
 
 pub fn parse_args() -> Args {
