@@ -6,7 +6,7 @@
 
 pub static mut TOKEN: &str = "";
 
-#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 struct Task {
     name: String,
     completed: bool,
@@ -54,7 +54,8 @@ fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
         .expect("Invalid authentication?"))
 }
 
-fn add_tasks_to_table(table: &mut prettytable::Table, tasks: &Vec<&Task>) {
+fn add_project_to_table(table: &mut prettytable::Table, project: &str, tasks: &[Task]) {
+    table.add_row(row![format!("{} ({})", project, tasks.iter().len())]);
     for task in tasks {
         table.add_row(row![
             format!(
@@ -71,21 +72,24 @@ fn add_tasks_to_table(table: &mut prettytable::Table, tasks: &Vec<&Task>) {
     }
 }
 
-fn print_tasks_grouped(tasks: &Vec<Task>) {
+fn add_tasks_grouped(table: &mut prettytable::Table, tasks: &[Task]) {
     let mut projects = std::collections::BTreeMap::new();
     for task in tasks {
         projects
             .entry(task.project.to_uppercase())
             .or_insert_with(Vec::new)
-            .push(task);
+            .push(task.clone());
     }
 
-    let mut table = prettytable::Table::new();
     for (project, tasks) in projects.into_iter() {
-        table.add_row(row![format!("{} ({})", project, tasks.iter().len())]);
-        add_tasks_to_table(&mut table, &tasks);
+        add_project_to_table(table, &project, &tasks);
         table.add_row(row![]);
     }
+}
+
+fn print_tasks_grouped(tasks: &[Task]) {
+    let mut table = prettytable::Table::new();
+    add_tasks_grouped(&mut table, &tasks);
     table.set_format(
         prettytable::format::FormatBuilder::new()
             .padding(0, 10)
@@ -101,17 +105,57 @@ pub fn print_all() -> Result<(), Box<std::error::Error>> {
 }
 
 pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
-    let inbox = get_tasks()?
-        .into_iter()
-        .filter(|x| x.project == "Inbox")
-        .collect();
-    print_tasks_grouped(&inbox);
+    print_tasks_grouped(
+        &get_tasks()?
+            .into_iter()
+            .filter(|x| x.project == "Inbox")
+            .collect::<Vec<_>>(),
+    );
     Ok(())
 }
 
 pub fn print_next() -> Result<(), Box<std::error::Error>> {
-    let next = get_tasks()?.into_iter().filter(|x| x.next).collect();
+    let next = &get_tasks()?
+        .into_iter()
+        .filter(|x| x.next)
+        .collect::<Vec<_>>();
     print_tasks_grouped(&next);
+    Ok(())
+}
+
+pub fn print_conky() -> Result<(), Box<std::error::Error>> {
+    let all = get_tasks()?;
+    let red = "${color red}";
+    let hr = "${hr 2}";
+    let yellow = "${color yellow}";
+    let blue = "${color4}";
+    let alignc = "${alignc}";
+    let default = "${color7}";
+    let mut projects = std::collections::BTreeMap::new();
+    for task in all.iter() {
+        projects
+            .entry(task.project.to_uppercase())
+            .or_insert_with(Vec::new)
+            .push(task.clone());
+    }
+    let mut table = prettytable::Table::new();
+    let now: Vec<_> = all.into_iter().filter(|x| x.next).collect();
+    let side: Vec<_> = projects.get("SIDE").unwrap_or(&Vec::new()).to_vec();
+    let next: Vec<_> = projects.get("2-NEXT").unwrap_or(&Vec::new()).to_vec();
+    table.add_row(row![format!("{}{}\t\t\t1-NOW", yellow, alignc)]);
+    table.add_row(row![hr]);
+    add_tasks_grouped(&mut table, &now);
+    table.add_row(row![hr.to_owned() + red]);
+    add_project_to_table(&mut table, "SIDE", &side);
+    table.add_row(row![blue]);
+    add_project_to_table(&mut table, "2-NEXT", &next);
+    table.add_row(row![default]);
+    table.set_format(
+        prettytable::format::FormatBuilder::new()
+            .padding(0, 10)
+            .build(),
+    );
+    table.printstd();
     Ok(())
 }
 

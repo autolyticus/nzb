@@ -26,7 +26,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
     if let Some(x) = a.arg_command {
         match x {
             args::Command::All => nzb::print_all()?,
-            args::Command::Conky => unimplemented!(),
+            args::Command::Conky => nzb::print_conky()?,
             args::Command::Inbox => nzb::print_inbox()?,
             args::Command::Next => nzb::print_next()?,
         }
