@@ -32,8 +32,8 @@ fn add_tasks_grouped(table: &mut prettytable::Table, tasks: &[Task]) {
             .push(task.clone());
     }
 
-    for (project, tasks) in projects.into_iter() {
-        add_project_to_table(table, &project, &tasks);
+    for (project, tasks) in projects.iter() {
+        add_project_to_table(table, project, tasks);
         table.add_row(row![]);
     }
 }

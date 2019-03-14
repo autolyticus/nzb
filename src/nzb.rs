@@ -54,8 +54,9 @@ pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
         .send()?
         .json::<Vec<Task>>()
         .expect("Invalid authentication?")
-        .into_iter()
+        .iter()
         .filter(|x| x.completed == false)
+        .cloned()
         .collect())
 }
 
