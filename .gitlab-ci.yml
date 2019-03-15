@@ -1,8 +1,11 @@
 image: "rust:latest"
+cache:
+  paths:
+    - target
+
 build:
   script:
     - cargo build --release
   artifacts:
     paths:
-      - target
       - ./target/release/nzb
