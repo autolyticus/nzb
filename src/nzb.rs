@@ -62,9 +62,9 @@ pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
 
 pub fn add_task(name: String) -> Result<(), Box<std::error::Error>> {
     if reqwest::Client::new()
-        .post(&format!("{}/task", URL))
+        .post(&format!("{}/json/task", URL))
         .header("Authorization", get_auth_token()?.as_ref(): &str)
-        .form(&[("name", name)])
+        .json(&json!({ "name": name }))
         .send()?
         .status()
         .is_success()
