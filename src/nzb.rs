@@ -49,7 +49,7 @@ pub fn get_auth_token() -> Result<String, Box<std::error::Error>> {
 pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
     let tasks = reqwest::Client::new()
         .get(&format!("{}/list", URL))
-        .header("Authorization", get_auth_token()?.as_ref(): &str)
+        .header("Authorization", get_auth_token()?.as_str())
         .form(&[("type", "task")])
         .send()?
         .json::<Vec<Task>>();
@@ -63,7 +63,7 @@ pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
 pub fn add_task(name: String) -> Result<(), Box<std::error::Error>> {
     if reqwest::Client::new()
         .post(&format!("{}/json/task", URL))
-        .header("Authorization", get_auth_token()?.as_ref(): &str)
+        .header("Authorization", get_auth_token()?.as_str())
         .json(&json!({ "name": name }))
         .send()?
         .status()
@@ -90,7 +90,7 @@ pub fn star((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::er
         .collect();
     reqwest::Client::new()
         .put(&format!("{}/json/task", URL))
-        .header("Authorization", get_auth_token()?.as_ref(): &str)
+        .header("Authorization", get_auth_token()?.as_str())
         .json(&processed)
         .send()?;
     Ok(())
@@ -111,7 +111,7 @@ pub fn unstar((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::
         .collect();
     reqwest::Client::new()
         .put(&format!("{}/json/task", URL))
-        .header("Authorization", get_auth_token()?.as_ref(): &str)
+        .header("Authorization", get_auth_token()?.as_str())
         .json(&processed)
         .send()?;
     Ok(())
@@ -132,7 +132,7 @@ pub fn mark_done((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<st
         .collect();
     reqwest::Client::new()
         .put(&format!("{}/json/task", URL))
-        .header("Authorization", get_auth_token()?.as_ref(): &str)
+        .header("Authorization", get_auth_token()?.as_str())
         .json(&processed)
         .send()?;
     Ok(())

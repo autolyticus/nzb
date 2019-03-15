@@ -4,7 +4,6 @@
 // Distributed under terms of the MIT license.
 //
 
-#![feature(type_ascription)]
 extern crate dirs;
 extern crate docopt;
 #[macro_use]
