@@ -34,17 +34,3 @@ pub fn picker(
             .collect::<Vec<_>>(),
     ))
 }
-
-pub fn login() -> Result<(String, String), Box<std::error::Error>> {
-    use std::io::prelude::*;
-    println!("\nPlease login to Nozbe: ");
-    print!("Nozbe Username/Email: ");
-    std::io::stdout()
-        .flush()
-        .ok()
-        .expect("Could not flush stdout");
-    let mut username = String::new();
-    std::io::stdin().read_line(&mut username)?;
-    let password = rpassword::prompt_password_stdout("Password: ").expect("Error reading password");
-    Ok((username, password))
-}

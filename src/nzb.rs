@@ -56,6 +56,9 @@ pub fn read_auth_from_file() -> Result<String, Box<std::error::Error>> {
 }
 
 pub fn write_auth_into_file(auth: &str) -> Result<(), Box<std::error::Error>> {
+    if auth.len() != 41 {
+        return Err("Invalid access token")?;
+    }
     use std::error::Error;
     use std::fs::File;
     use std::io::prelude::*;
@@ -67,19 +70,26 @@ pub fn write_auth_into_file(auth: &str) -> Result<(), Box<std::error::Error>> {
         ),
         Ok(file) => file,
     };
-    file.write_fmt(format_args!("{}\n", auth))?;
+    file.write_fmt(format_args!("{}", auth))?;
     Ok(())
 }
 
-pub fn make_auth_token(
-    (username, password): (String, String),
-) -> Result<(), Box<std::error::Error>> {
+pub fn make_auth_token() -> Result<(), Box<std::error::Error>> {
     unsafe {
         if TOKEN != "" {
             return Ok(write_auth_into_file(TOKEN)?);
         }
     }
-    println!("{} {}", username, password);
+    println!("When you press ENTER: A web browser is going to open with this URL:");
+    println!("{}/login?client_id={}", URL, CLIENT_ID);
+    println!("Please login and copy the access token into this terminal window");
+    println!("You may have to manually paste this URL into your browser");
+    std::io::stdin().read_line(&mut String::new())?;
+    webbrowser::open(&format!("{}/login?client_id={}", URL, CLIENT_ID))?;
+    let mut auth = String::new();
+    std::io::stdin().read_line(&mut auth)?;
+    write_auth_into_file(&auth)?;
+    println!("Successfully logged in! You may ");
     Ok(())
 }
 
