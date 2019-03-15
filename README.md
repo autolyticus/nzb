@@ -17,3 +17,10 @@ cargo install --path=.
 ```
 
 in the base directory.
+
+TODO:
+
+1. Add better Authentication mechanism (uname + pw)
+2. Add search feature
+3. Add feature for adding links directly to comments + task name
+4. Get counts of inbox items
