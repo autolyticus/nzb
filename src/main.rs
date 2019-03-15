@@ -12,6 +12,7 @@ extern crate serde_derive;
 extern crate serde_json;
 #[macro_use]
 extern crate prettytable;
+extern crate rpassword;
 extern crate skim;
 
 mod args;
@@ -49,6 +50,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
                     disp::print_lists(a.arg_args)?
                 }
             }
+            args::Command::Login => nzb::make_auth_token(tui::login()?)?,
             args::Command::Now | args::Command::Priority | args::Command::Starred => {
                 disp::print_now()?
             }

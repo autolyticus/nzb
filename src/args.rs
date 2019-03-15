@@ -27,6 +27,7 @@ Commands:
   help                         Show this screen
   inbox                        View your inbox
   list [<list>...]             Show specific lists
+  login                        Login to Nozbe
   now | priority | starred     View starred tasks
   star                         Star a task
   unstar                       Unstar a task
@@ -48,6 +49,7 @@ pub enum Command {
     Help,
     Inbox,
     List,
+    Login,
     Now,
     Priority,
     Star,
