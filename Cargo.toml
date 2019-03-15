@@ -1,7 +1,7 @@
 [package]
 name = "nzb"
 description = "A CLI frontend for the Nozbe productivity tool. Heavily inspired by Wunderline"
-version = "0.1.7"
+version = "0.1.8"
 authors = ["Govind KP <reisub0@gmail.com>"]
 repository = "https://github.com/reisub0/nzb"
 readme = "./README.md"
@@ -12,9 +12,9 @@ keywords = ["productivity", "nozbe", "cli", "todo", "task"]
 
 [badges]
 # # GitLab CI: `repository` is required. `branch` is optional; default is `master`
-gitlab = { repository = "https://gitlab.com/reisub0/nzb", branch = "master" }
-# is-it-maintained-issue-resolution = { repository = "https://github.com/reisub0/nzb" }
-# is-it-maintained-open-issues = { repository = "https://github.com/reisub0/nzb" }
+gitlab = { repository = "reisub0/nzb", branch = "master" }
+is-it-maintained-issue-resolution = { repository = "reisub0/nzb" }
+is-it-maintained-open-issues = { repository = "reisub0/nzb" }
 # Maintenance: `status` is required. Available options are `actively-developed`,
 # `passively-maintained`, `as-is`, `experimental`, `looking-for-maintainer`,
 # `deprecated`, and the default `none`, which displays no badge on crates.io.
