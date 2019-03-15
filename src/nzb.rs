@@ -5,6 +5,7 @@
 //
 
 static URL: &str = "https://api.nozbe.com:3000";
+static CLIENT_ID: &str = "3e6fb8812bb03f18cf66c5e2e932f67f8aa356e5";
 pub static mut TOKEN: &str = "";
 
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
