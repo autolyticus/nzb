@@ -23,7 +23,12 @@ pub struct Task {
     pub project: String,
 }
 
-pub fn get_auth_token() -> Result<String, Box<std::error::Error>> {
+fn get_file_path() -> std::path::PathBuf {
+    let home = dirs::home_dir().expect("Could not detect home directory! Make sure $HOME is set");
+    home.join(".local").join(".nozbe_token")
+}
+
+pub fn read_auth_from_file() -> Result<String, Box<std::error::Error>> {
     use std::fs::File;
     use std::io::prelude::*;
     unsafe {
@@ -31,25 +36,56 @@ pub fn get_auth_token() -> Result<String, Box<std::error::Error>> {
             return Ok(TOKEN.to_owned());
         }
     }
-    let mut file = File::open(
-        dirs::home_dir()
-            .unwrap()
-            .to_str()
-            .unwrap_or_default()
-            .to_owned()
-            + "/.local/.nozbe_token",
-    )?;
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)?;
-    // Remove EOL (\n)
-    contents.pop();
-    Ok(contents)
+    let file = File::open(get_file_path());
+    if file.is_ok() {
+        let mut contents = String::new();
+        if let Ok(x) = file.unwrap().read_to_string(&mut contents) {
+            if x != 41 {
+                Err("Invalid auth token, please login again.")?
+            }
+            // Remove EOL (\n)
+            contents.pop();
+            return Ok(contents);
+        } else {
+            Err("Error with auth file ~/.local/.nozbe_token, Login again and ensure you have privileges")?
+        }
+    } else {
+        Err("Error with auth file ~/.local/.nozbe_token, Login again and ensure you have privileges")?
+    }
+}
+
+pub fn write_auth_into_file(auth: &str) -> Result<(), Box<std::error::Error>> {
+    use std::error::Error;
+    use std::fs::File;
+    use std::io::prelude::*;
+    let mut file = match File::create(get_file_path()) {
+        Err(why) => panic!(
+            "couldn't create {}: {}",
+            get_file_path().display(),
+            why.description()
+        ),
+        Ok(file) => file,
+    };
+    file.write_fmt(format_args!("{}\n", auth))?;
+    Ok(())
+}
+
+pub fn make_auth_token(
+    (username, password): (String, String),
+) -> Result<(), Box<std::error::Error>> {
+    unsafe {
+        if TOKEN != "" {
+            return Ok(write_auth_into_file(TOKEN)?);
+        }
+    }
+    println!("{} {}", username, password);
+    Ok(())
 }
 
 pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
     let tasks = reqwest::Client::new()
         .get(&format!("{}/list", URL))
-        .header("Authorization", get_auth_token()?.as_str())
+        .header("Authorization", read_auth_from_file()?.as_str())
         .form(&[("type", "task")])
         .send()?
         .json::<Vec<Task>>();
@@ -63,7 +99,7 @@ pub fn get_tasks() -> Result<Vec<Task>, Box<std::error::Error>> {
 pub fn add_task(name: String) -> Result<(), Box<std::error::Error>> {
     if reqwest::Client::new()
         .post(&format!("{}/json/task", URL))
-        .header("Authorization", get_auth_token()?.as_str())
+        .header("Authorization", read_auth_from_file()?.as_str())
         .json(&json!({ "name": name }))
         .send()?
         .status()
@@ -90,7 +126,7 @@ pub fn star((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::er
         .collect();
     reqwest::Client::new()
         .put(&format!("{}/json/task", URL))
-        .header("Authorization", get_auth_token()?.as_str())
+        .header("Authorization", read_auth_from_file()?.as_str())
         .json(&processed)
         .send()?;
     Ok(())
@@ -111,7 +147,7 @@ pub fn unstar((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::
         .collect();
     reqwest::Client::new()
         .put(&format!("{}/json/task", URL))
-        .header("Authorization", get_auth_token()?.as_str())
+        .header("Authorization", read_auth_from_file()?.as_str())
         .json(&processed)
         .send()?;
     Ok(())
@@ -132,7 +168,7 @@ pub fn mark_done((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<st
         .collect();
     reqwest::Client::new()
         .put(&format!("{}/json/task", URL))
-        .header("Authorization", get_auth_token()?.as_str())
+        .header("Authorization", read_auth_from_file()?.as_str())
         .json(&processed)
         .send()?;
     Ok(())
