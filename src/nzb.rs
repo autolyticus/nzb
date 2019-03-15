@@ -89,7 +89,7 @@ pub fn make_auth_token() -> Result<(), Box<std::error::Error>> {
     let mut auth = String::new();
     std::io::stdin().read_line(&mut auth)?;
     write_auth_into_file(&auth)?;
-    println!("Successfully logged in! You may ");
+    println!("Successfully logged in! You may start using the app functionality");
     Ok(())
 }
 
