@@ -3,4 +3,6 @@ build:
   script:
     - cargo build --release
   artifacts:
-    - ./target/release/nzb
+    paths:
+      - target
+      - ./target/release/nzb
