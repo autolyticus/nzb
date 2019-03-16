@@ -110,6 +110,7 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
         .iter()
         .cloned()
         .filter(|x| x.project == "Side")
+        .filter(|x| x.now == false)
         .collect();
     if !now.is_empty() {
         table.add_row(row![format!("{}{}\t\t1-NOW", yellow, alignc)]);

@@ -63,7 +63,7 @@ pub fn parse_args() -> Args {
     Docopt::new(USAGE)
         .unwrap_or_else(|e| e.exit())
         .options_first(true)
-        .version(Some("Nzb: A Nozbe client (v0.1.1)".to_owned()))
+        .version(Some("Nzb: A Nozbe client (v0.2.0)".to_owned()))
         .deserialize()
         .unwrap_or_else(|e| e.exit())
 }

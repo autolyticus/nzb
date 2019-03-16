@@ -9,11 +9,16 @@ The core functionality of the excellent [Wunderline](https://github.com/wayneash
 ## Features
 
 - Extremely usable interface
+
 - Takes literally 10 seconds to set up
+
 - Add tasks to your Nozbe inbox in 2 seconds flat
-- Mark multiple tasks as done, or star them, with Fuzzy Search. All in a coupla jiffies! Made possible by the [skim library](https://github.com/lotabout/skim)
 
+- Mark multiple tasks as done, or star them, with Fuzzy Search. All in a couple of jiffies! Made possible by the [skim library](https://github.com/lotabout/skim)
 
+- Conky integration for printing a nice summary (an Android widget but for your desktop)
+
+  ![2019-03-16-195651_1366x768_scrot](https://user-images.githubusercontent.com/25099244/54476743-e2a60900-4826-11e9-8085-19a6d6e35d23.png)
 
 ## Usage
 
@@ -60,6 +65,23 @@ Running `nzb <star|unstar|done> [query]` opens a fuzzy search window with all th
 [![asciicast](https://asciinema.org/a/234102.svg)](https://asciinema.org/a/234102)
 
 Click on the link above to see a demo.
+
+### Conky integration
+
+Unfortunately, right now this needs the installation of the `ansifilter` tool, because of the way escape sequences are handled in conky. If someone knows a better way, please drop a PR!
+
+Make a new script called `nzbWrap` and put it in your `$PATH` with the following contents.
+
+```bash
+#!/usr/bin/env sh
+nzb conky | ansifilter
+```
+
+Now, in your `conky.conf`, find the `conky.text` section. add
+```
+${texecpi 60 nzbWrap}
+```
+where 60 is how often(in seconds) you want the view to be updated.
 
 ## Installation
 
