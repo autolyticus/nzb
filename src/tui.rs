@@ -14,6 +14,7 @@ pub fn picker(
         .height("10%")
         .multi(true)
         .prompt(prompt)
+        .reverse(true)
         .query(&query);
     let task_string = tasks
         .iter()

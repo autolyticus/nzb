@@ -1,26 +1,94 @@
-# nzb
+# Nzb
 
 A beautiful CLI front-end for Nozbe written in Rust.
 
-A work in progress. It is planned to be as feature-rich as the excellent [Wunderline](https://github.com/wayneashleyberry/wunderline) app for Wunderlist.
+The core functionality of the excellent [Wunderline](https://github.com/wayneashleyberry/wunderline) app for Wunderlist is already present.
 
-### Installation
 
-Make sure you have the latest (stable) versions of Cargo and/or Rustup installed.
 
-#### From Cargo
+## Features
+
+- Extremely usable interface
+- Takes literally 10 seconds to set up
+- Add tasks to your Nozbe inbox in 2 seconds flat
+- Mark multiple tasks as done, or star them, with Fuzzy Search. All in a coupla jiffies! Made possible by the [skim library](https://github.com/lotabout/skim)
+
+
+
+## Usage
+
+```bash
+$ nzb help
+Nozbe front-end written in Rust.
+
+Usage:
+  nzb [options] [<command> [<args>...]]
+  nzb -h | --help
+  nzb --version
+
+Options:
+  -a <token> --auth=<token>    Specify an alternate Nozbe authentication token (Refer Nozbe API Documentation)
+                               (Note: The default authentication token is assumed to be at $HOME/.local/.nozbe_token)
+  -h --help                    Show this screen
+  -V --version                 Show version
+
+Commands:
+  add                          Add a task to your Nozbe Inbox
+  all                          View all of your tasks (This is the default action)
+  conky                        A conky-friendly, colourful summary of all your tasks
+  done                         Mark task(s) as done with fuzzy search
+  help                         Show this screen
+  inbox                        View your inbox
+  list [<list>...]             Show specific lists
+  login                        Login to Nozbe
+  now | priority | starred     View starred tasks
+  star                         Star task(s) with fuzzy search
+  unstar                       Unstar task(s) with fuzzy search
+```
+
+
+### Adding tasks
+Simply run `nzb add <task title>`.
+[![asciicast](https://asciinema.org/a/234104.svg)](https://asciinema.org/a/234104)
+
+### Starring/Unstarring/Marking tasks as done
+
+Running `nzb <star|unstar|done> [query]` opens a fuzzy search window with all the tasks that match the optional query. Multi-select tasks with Tab and select any one with Enter.
+
+[![asciicast](https://asciinema.org/a/234102.svg)](https://asciinema.org/a/234102)
+
+Click on the link above to see a demo.
+
+## Installation
+
+### From Binaries
+
+Binary releases can be found at the [Releases](https://gitlab.com/reisub0/nzb/tags) page. Unzip `artifacts.zip` to obtain your binary at `target/release/nzb`. 
+
+* Currently only `linux-x86_64` is supported, but I will support other targets once I figure out how to get cross compilation working on Gitlab CI.
+
+### From Crates.io
 
 ```bash
 cargo install nzb
 ```
+### From Source
 
-#### From Binaries
+```bash
+git clone https://github.com/reisub0/nzb
+cargo install --path nzb
+```
 
-Binary releases can be found at the [Releases](https://gitlab.com/reisub0/nzb/tags) page.
 
-TODO:
 
-1. Add better Authentication mechanism (uname + pw)
-2. Add search feature
+## TODO:
+
+1. Get Cross compilation to Windows working
+2. Filter tasks by context
 3. Add feature for adding links directly to comments + task name
-4. Get counts of inbox items
+
+
+
+## LICENSE
+
+Nzb is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
