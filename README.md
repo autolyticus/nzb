@@ -72,13 +72,11 @@ Click on the link above to see a demo.
 
 ### Conky integration
 
-Unfortunately, right now this needs the installation of the `ansifilter` tool, because of the way escape sequences are handled in conky. If someone knows a better way, please drop a PR!
-
 Make a new script called `nzbWrap` and put it in your `$PATH` with the following contents.
 
 ```bash
 #!/usr/bin/env sh
-nzb conky | ansifilter
+nzb conky
 ```
 
 Now, in your `conky.conf`, find the `conky.text` section. add
@@ -86,6 +84,8 @@ Now, in your `conky.conf`, find the `conky.text` section. add
 ${texecpi 60 nzbWrap}
 ```
 where 60 is how often(in seconds) you want the view to be updated.
+
+
 
 ## Installation
 
