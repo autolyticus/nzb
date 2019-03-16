@@ -54,6 +54,9 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::Now | args::Command::Priority | args::Command::Starred => {
                 disp::print_now()?
             }
+            args::Command::Open => {
+                webbrowser::open("https://app.nozbe.com/")?;
+            }
             args::Command::Star => {
                 let tasks = nzb::get_tasks()?;
                 nzb::star(tui::picker(

@@ -14,23 +14,24 @@ Usage:
   nzb --version
 
 Options:
-  -a <token> --auth=<token>    Specify the Nozbe authentication token (Refer Nozbe API Documentation)
-                               (Note: The default authentication token is assumed to be at $HOME/.local/.nozbe_token)
+  -a <token> --auth=<token>    Specify an alternate Nozbe authentication token (Refer Nozbe API Documentation)
+                               (Note: The default authentication token is at $HOME/.local/.nozbe_token)
   -h --help                    Show this screen
   -V --version                 Show version
 
 Commands:
   add                          Add a task to your Nozbe Inbox
-  all                          View all your tasks (This is the default action)
+  all                          View all of your tasks (This is the default action)
   conky                        A conky-friendly, colourful summary of all your tasks
-  done                         Mark a task as done
+  done                         Mark task(s) as done with fuzzy search
   help                         Show this screen
   inbox                        View your inbox
   list [<list>...]             Show specific lists
   login                        Login to Nozbe
   now | priority | starred     View starred tasks
-  star                         Star a task
-  unstar                       Unstar a task
+  open                         Open Nozbe in your browser
+  star                         Star task(s) with fuzzy search
+  unstar                       Unstar task(s) with fuzzy search
 ";
 
 #[derive(Debug, Deserialize)]
@@ -51,6 +52,7 @@ pub enum Command {
     List,
     Login,
     Now,
+    Open,
     Priority,
     Star,
     Starred,
