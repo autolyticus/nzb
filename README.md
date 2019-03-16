@@ -72,16 +72,9 @@ Click on the link above to see a demo.
 
 ### Conky integration
 
-Make a new script called `nzbWrap` and put it in your `$PATH` with the following contents.
-
-```bash
-#!/usr/bin/env sh
-nzb conky
+In your `conky.conf`, find the `conky.text` section. add
 ```
-
-Now, in your `conky.conf`, find the `conky.text` section. add
-```
-${texecpi 60 nzbWrap}
+${texecpi 60 nzb conky}
 ```
 where 60 is how often(in seconds) you want the view to be updated.
 
