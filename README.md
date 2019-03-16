@@ -17,7 +17,7 @@ The core functionality of the excellent [Wunderline](https://github.com/wayneash
 
 ## Usage
 
-```bash
+```
 $ nzb help
 Nozbe front-end written in Rust.
 
@@ -28,7 +28,7 @@ Usage:
 
 Options:
   -a <token> --auth=<token>    Specify an alternate Nozbe authentication token (Refer Nozbe API Documentation)
-                               (Note: The default authentication token is assumed to be at $HOME/.local/.nozbe_token)
+                               (Note: The default authentication token is at $HOME/.local/.nozbe_token)
   -h --help                    Show this screen
   -V --version                 Show version
 
@@ -42,13 +42,15 @@ Commands:
   list [<list>...]             Show specific lists
   login                        Login to Nozbe
   now | priority | starred     View starred tasks
+  open                         Open Nozbe in your browser
   star                         Star task(s) with fuzzy search
   unstar                       Unstar task(s) with fuzzy search
 ```
 
 
 ### Adding tasks
-Simply run `nzb add <task title>`.
+Simply run `nzb add <task title>`
+
 [![asciicast](https://asciinema.org/a/234104.svg)](https://asciinema.org/a/234104)
 
 ### Starring/Unstarring/Marking tasks as done
@@ -81,7 +83,7 @@ cargo install --path nzb
 
 
 
-## TODO:
+## WIP:
 
 1. Get Cross compilation to Windows working
 2. Filter tasks by context
@@ -89,6 +91,6 @@ cargo install --path nzb
 
 
 
-## LICENSE
+## License
 
 Nzb is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
