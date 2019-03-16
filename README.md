@@ -1,6 +1,6 @@
 # Nzb
 
-[![crates.io](https://img.shields.io/crates/v/nzb.svg?style=flat)](https://crates.io/crates/nzb) [![crates.io](https://img.shields.io/crates/d/nzb.svg?style=flat)](https://crates.io/crates/nzb)[![Build Status](https://gitlab.com/reisub0/nzb/badges/master/build.svg)](https://gitlab.com/reisub0/nzb/badges/master/build.svg)
+[![crates.io](https://img.shields.io/crates/v/nzb.svg?style=flat)](https://crates.io/crates/nzb) [![crates.io](https://img.shields.io/crates/d/nzb.svg?style=flat)](https://crates.io/crates/nzb) [![Build Status](https://gitlab.com/reisub0/nzb/badges/master/build.svg)](https://gitlab.com/reisub0/nzb/badges/master/build.svg?style=flat)
 
 
 
@@ -22,7 +22,9 @@ The core functionality of the excellent [Wunderline](https://github.com/wayneash
 
 - Conky integration for printing a nice summary (an Android widget but for your desktop)
 
-  ![2019-03-16-195651_1366x768_scrot](https://user-images.githubusercontent.com/25099244/54476743-e2a60900-4826-11e9-8085-19a6d6e35d23.png)
+
+
+![2019-03-16-195651_1366x768_scrot](https://user-images.githubusercontent.com/25099244/54476743-e2a60900-4826-11e9-8085-19a6d6e35d23.png)
 
 ## Usage
 
@@ -84,9 +86,9 @@ where 60 is how often(in seconds) you want the view to be updated.
 
 ### From Binaries
 
-Binary releases can be found at the [Releases](https://gitlab.com/reisub0/nzb/tags) page. Unzip `artifacts.zip` to obtain your binary at `target/release/nzb`. 
+Binary releases can be found at the [Releases](https://gitlab.com/reisub0/nzb/tags) page.  Select the version number, click the download icon and download `build`. Unzip `artifacts.zip` to obtain your binary at `target/release/nzb`. 
 
-* Currently only `linux-x86_64` is supported, but I will support other targets once I figure out how to get cross compilation working on Gitlab CI.
+**Note: Currently only `linux-x86_64` is supported; support for other targets is planned once some issues with GitLab CI Cross compilation have been ironed out.**
 
 ### From Crates.io
 
@@ -96,7 +98,7 @@ cargo install nzb
 ### From Source
 
 ```bash
-git clone https://github.com/reisub0/nzb
+git clone https://gitlab.com/reisub0/nzb
 cargo install --path nzb
 ```
 
