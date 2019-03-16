@@ -1,5 +1,9 @@
 # Nzb
 
+[![crates.io](https://img.shields.io/crates/v/nzb.svg?style=flat)](https://crates.io/crates/nzb) [![crates.io](https://img.shields.io/crates/d/nzb.svg?style=flat)](https://crates.io/crates/nzb)[![Build Status](https://gitlab.com/reisub0/nzb/badges/master/build.svg)](https://gitlab.com/reisub0/nzb/badges/master/build.svg)
+
+
+
 A beautiful CLI front-end for Nozbe written in Rust.
 
 The core functionality of the excellent [Wunderline](https://github.com/wayneashleyberry/wunderline) app for Wunderlist is already present.
