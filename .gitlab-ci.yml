@@ -1,4 +1,4 @@
-image: "rust:latest"
+image: "reisub0/rust-cross-windows:first"
 cache:
   paths:
     - target/
