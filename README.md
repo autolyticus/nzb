@@ -1,6 +1,6 @@
 # Nzb
 
-[![crates.io](https://img.shields.io/crates/v/nzb.svg?style=flat)](https://crates.io/crates/nzb) [![crates.io](https://img.shields.io/crates/d/nzb.svg?style=flat)](https://crates.io/crates/nzb) [![Build Status](https://gitlab.com/reisub0/nzb/badges/master/build.svg)](https://gitlab.com/reisub0/nzb/badges/master/build.svg?style=flat)
+[![crates.io](https://img.shields.io/crates/v/nzb.svg?style=flat)](https://crates.io/crates/nzb) [![crates.io](https://img.shields.io/crates/d/nzb.svg?style=flat)](https://crates.io/crates/nzb) [![Build Status](https://gitlab.com/reisub0/nzb/badges/master/build.svg)](https://gitlab.com/reisub0/nzb/badges/master/build.svg?style=flat) [![made-with-rust](https://img.shields.io/badge/made%20with%20♥-rust-dea584.svg)](https://www.rust-lang.org/)
 
 
 
@@ -8,7 +8,11 @@ A beautiful CLI front-end for Nozbe written in Rust.
 
 The core functionality of the excellent [Wunderline](https://github.com/wayneashleyberry/wunderline) app for Wunderlist is already present.
 
+## What is Nozbe?
 
+[Nozbe](https://nozbe.com/) is an amazing to-do list and task management system that follows the Getting Things Done (GTD)® philosophy. The basic idea is to have an Inbox where you simply fill ideas and tasks as you get them throughout the day. Tasks in the Inbox are further processed based on their priority and urgency, and then finally, executed.
+
+Nozbe has pretty good apps for web, desktop and mobile. However, I found all these quite lacking in terms of speed and usability. The overhead of switching between my projects to find the certain task I wanted to mark as done was a bit too much to handle. So I took some inspiration from the Wunderline app, and made this!
 
 ## Features
 
