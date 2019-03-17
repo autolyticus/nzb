@@ -1,11 +1,35 @@
-image: "rust:latest"
+image: "sseemayer/rust-musl-builder-mingw:latest"
+
 cache:
   paths:
-    - target
+    - target/
 
-build:
+stages:
+  - test
+  - build
+
+test:
+  stage: test
   script:
-    - cargo build --release
+    - rustc --version && cargo --version
+    - cargo test --all --verbose
+
+x86_64-unknown-linux-gnu:
+  stage: build
+
   artifacts:
     paths:
-      - ./target/release/nzb
+      - target/release/nzb
+
+  script:
+    - cargo build --release
+
+x86_64-pc-windows-gnu:
+  stage: build
+
+  artifacts:
+    paths:
+      - target/x86_64-pc-windows-gnu/release/nzb.exe
+
+  script:
+    - cargo build --release --target x86_64-pc-windows-gnu
