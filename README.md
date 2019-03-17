@@ -62,8 +62,12 @@ Commands:
   unstar                       Unstar task(s) with fuzzy search
 ```
 
+### Logging in
+
+To start using `nzb` please run `nzb login` and follow the instructions.
 
 ### Adding tasks
+
 Simply run `nzb add <task title>`
 
 [![asciicast](https://asciinema.org/a/234104.svg)](https://asciinema.org/a/234104)
@@ -92,7 +96,7 @@ where 60 is how often(in seconds) you want the view to be updated.
 
 Binary releases can be found at the [Releases](https://gitlab.com/reisub0/nzb/tags) page.  Select the version number, click the download icon and download `build`. Unzip `artifacts.zip` to obtain your binary at `target/release/nzb`. 
 
-**Note: Currently only `linux-x86_64` is supported; support for other targets is planned once some issues with GitLab CI Cross compilation have been ironed out.**
+Note: Currently only **`linux-x86_64`** is supported; support for other targets is planned once some issues with GitLab CI Cross compilation have been ironed out. Windows users have to set up `cargo`. PRs are appreciated for Windows binaries
 
 ### From Crates.io
 
@@ -111,8 +115,9 @@ cargo install --path nzb
 ## WIP:
 
 1. Get Cross compilation to Windows working
-2. Filter tasks by context
-3. Add feature for adding links directly to comments + task name
+2. Filter tasks by time (View tasks that are due today, overdue etc)
+3. Filter tasks by context
+4. Add feature for adding links directly to comments + task name
 
 
 
