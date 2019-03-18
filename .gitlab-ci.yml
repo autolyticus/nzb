@@ -1,4 +1,4 @@
-image: "reisub0/rust-cross-windows:first"
+image: "reisub0/rust-cross-windows:latest"
 cache:
   paths:
     - target/
@@ -11,16 +11,15 @@ test:
   stage: test
   script:
     - rustc --version && cargo --version
-    - cargo test --all --verbose
+    # - cargo test --all --verbose
 
 linux-x86_64:
   stage: build
   artifacts:
     paths:
-      - ./target/release/nzb
-
+      - target/release/nzb
   script:
-    - cargo build --release --target x86_64-unknown-linux-gnu
+    - cargo build --release
 
 windows-x86_64:
   stage: build
