@@ -94,9 +94,9 @@ where 60 is how often(in seconds) you want the view to be updated.
 
 ### From Binaries
 
-Binary releases can be found at the [Releases](https://gitlab.com/reisub0/nzb/tags) page.  Select the version number, click the download icon and download `build`. Unzip `artifacts.zip` to obtain your binary at `target/release/nzb`. 
+Binary releases can be found at the [Releases](https://gitlab.com/reisub0/nzb/tags) page.  Select the version number, click the download icon and download `linux-x86_64` artifacts. Unzip `artifacts.zip` to obtain your binary at `target/release/nzb`. 
 
-Note: Currently only **`linux-x86_64`** is supported; support for other targets is planned once some issues with GitLab CI Cross compilation have been ironed out. Windows users have to set up `cargo`. PRs are appreciated for Windows binaries
+Note: Currently only **`linux-x86_64`** is supported: macOS users can install from `cargo` or from source; support for Windows is unlikely due to a dependency on `termion`. PRs are highly appreciated for getting it working on Windows.
 
 ### From Crates.io
 
@@ -114,10 +114,9 @@ cargo install --path nzb
 
 ## WIP:
 
-1. Get Cross compilation to Windows working
-2. Filter tasks by time (View tasks that are due today, overdue etc)
-3. Filter tasks by context
-4. Add feature for adding links directly to comments + task name
+1. Filter tasks by time (View tasks that are due today, overdue etc)
+2. Filter tasks by context
+3. Add feature for adding links directly to comments + task name
 
 
 
