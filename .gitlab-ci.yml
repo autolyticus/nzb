@@ -1,4 +1,4 @@
-image: "reisub0/rust-cross-windows:latest"
+image: "rust:latest"
 cache:
   paths:
     - target/
@@ -20,13 +20,12 @@ linux-x86_64:
       - target/release/nzb
   script:
     - cargo build --release
-
-windows-x86_64:
-  stage: build
-  artifacts:
-    paths:
-      - target/x86_64-pc-windows-gnu/release/nzb.exe
-  before_script:
-    - rustup toolchain install stable-x86_64-pc-windows-gnu
-  script:
-    - cargo build --release --target x86_64-pc-windows-gnu
+# windows-x86_64:
+#   stage: build
+#   artifacts:
+#     paths:
+#       - target/x86_64-pc-windows-gnu/release/nzb.exe
+#   before_script:
+#     - rustup toolchain install stable-x86_64-pc-windows-gnu
+#   script:
+#     - cargo build --release --target x86_64-pc-windows-gnu
