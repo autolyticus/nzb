@@ -28,7 +28,7 @@ Nozbe has pretty good apps for web, desktop and mobile. However, I found all the
 
 
 
-![2019-03-16-195651_1366x768_scrot](https://user-images.githubusercontent.com/25099244/54476743-e2a60900-4826-11e9-8085-19a6d6e35d23.png)
+![nzb-conky-screenshot-of-desktop](https://user-images.githubusercontent.com/25099244/54476743-e2a60900-4826-11e9-8085-19a6d6e35d23.png)
 
 ## Usage
 
@@ -70,13 +70,13 @@ To start using `nzb` please run `nzb login` and follow the instructions.
 
 Simply run `nzb add <task title>`
 
-[![asciicast](https://asciinema.org/a/234104.svg)](https://asciinema.org/a/234104)
+[![gif of add feature](https://user-images.githubusercontent.com/25099244/54518414-33824280-498a-11e9-8df3-54775d6a6b93.gif)](https://asciinema.org/a/234104)
 
 ### Starring/Unstarring/Marking tasks as done
 
 Running `nzb <star|unstar|done> [query]` opens a fuzzy search window with all the tasks that match the optional query. Multi-select tasks with Tab and select any one with Enter.
 
-[![asciicast](https://asciinema.org/a/234102.svg)](https://asciinema.org/a/234102)
+[![gif of done feature](https://user-images.githubusercontent.com/25099244/54518412-32e9ac00-498a-11e9-8032-987c89cbfcd2.gif)](https://asciinema.org/a/234102)
 
 Click on the link above to see a demo.
 
