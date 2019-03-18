@@ -639,7 +639,7 @@ dependencies = [
 
 [[package]]
 name = "nzb"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "dirs 1.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
  "docopt 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
