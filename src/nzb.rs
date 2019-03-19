@@ -122,6 +122,21 @@ pub fn add_task(name: String) -> Result<(), Box<std::error::Error>> {
     }
 }
 
+pub fn add_link(name: String) -> Result<(), Box<std::error::Error>> {
+    if reqwest::Client::new()
+        .post(&format!("{}/json/task", URL))
+        .header("Authorization", read_auth_from_file()?.as_str())
+        .json(&json!({ "name": name , "comments": [{"body": name}]}))
+        .send()?
+        .status()
+        .is_success()
+    {
+        Ok(())
+    } else {
+        Err("Status code: Failure. Invalid authentication?")?
+    }
+}
+
 pub fn star((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::error::Error>> {
     if indices.is_empty() {
         return Ok(());
@@ -214,6 +229,12 @@ mod tests {
         "_datetime_s": "29 Mar 10:30",
         "_project_name": "Music",
         "_recur_name": "Do not repeat",
+        "comment_unread": true,
+        "comments": [
+            {
+            "body": "comment body"
+            }
+        ],
         "completed": false,
         "datetime": "2019-03-29 10:30:00",
         "dateweek": null,

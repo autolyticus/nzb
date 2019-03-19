@@ -20,12 +20,13 @@ Options:
   -V --version                 Show version
 
 Commands:
-  add                          Add a task to your Nozbe Inbox
+  add <name>                   Add a task to your Nozbe Inbox
   all                          View all of your tasks (This is the default action)
   conky                        A conky-friendly, colourful summary of all your tasks
   done                         Mark task(s) as done with fuzzy search
   help                         Show this screen
   inbox                        View your inbox
+  link <link>                  Add a link to your inbox (adds a comment with link)
   list [<list>...]             Show specific lists
   login                        Login to Nozbe
   now | priority | starred     View starred tasks
@@ -49,6 +50,7 @@ pub enum Command {
     Done,
     Help,
     Inbox,
+    Link,
     List,
     Login,
     Now,

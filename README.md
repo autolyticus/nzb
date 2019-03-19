@@ -115,8 +115,6 @@ cargo install --path nzb
 ## WIP:
 
 1. Filter tasks by time (View tasks that are due today, overdue etc)
-2. Filter tasks by context
-3. Add feature for adding links directly to comments + task name
 
 
 

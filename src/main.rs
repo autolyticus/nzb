@@ -43,6 +43,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             }
             args::Command::Help => args::print_help(),
             args::Command::Inbox => disp::print_inbox()?,
+            args::Command::Link => nzb::add_link(a.arg_args.join(" "))?,
             args::Command::List => {
                 if a.arg_args.is_empty() {
                     disp::print_all()?
