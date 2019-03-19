@@ -104,12 +104,14 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
         .iter()
         .cloned()
         .filter(|x| x.project == "2-Next")
+        .filter(|x| !x.categories.contains(&"Side".to_owned()))
         .filter(|x| x.now == false)
         .collect();
     let side: Vec<_> = all
         .iter()
         .cloned()
-        .filter(|x| x.project == "Side")
+        .filter(|x| x.project == "2-Next")
+        .filter(|x| x.categories.contains(&"Side".to_owned()))
         .filter(|x| x.now == false)
         .collect();
     if !now.is_empty() {
