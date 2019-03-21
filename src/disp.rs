@@ -34,7 +34,7 @@ fn add_tasks_grouped(table: &mut prettytable::Table, tasks: &[Task]) {
 
     for (project, tasks) in projects.iter() {
         add_project_to_table(table, project, tasks);
-        table.add_row(row![]);
+        table.add_empty_row();
     }
 }
 
@@ -106,7 +106,18 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
     let alignc = "${alignc}";
     let default = "${color7}";
     let mut table = prettytable::Table::new();
-    let now: Vec<_> = all.iter().filter(|x| x.now).cloned().collect();
+    let now: Vec<_> = all
+        .iter()
+        .filter(|x| x.now)
+        .filter(|x| x.categories.iter().all(|x| *x != "Side"))
+        .cloned()
+        .collect();
+    let now_side: Vec<_> = all
+        .iter()
+        .filter(|x| x.now)
+        .filter(|x| x.categories.iter().any(|x| *x == "Side"))
+        .cloned()
+        .collect();
     let next: Vec<_> = all
         .iter()
         .filter(|x| x.project == "2-Next")
@@ -121,10 +132,12 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
         .filter(|x| x.now == false)
         .cloned()
         .collect();
-    if !now.is_empty() {
+    if !(now.is_empty() || now_side.is_empty()) {
         table.add_row(row![format!("{}{}\t\t1-NOW", yellow, alignc)]);
         table.add_row(row![hr]);
         add_tasks_grouped(&mut table, &now);
+        add_project_to_table(&mut table, "SIDE", &now_side);
+        table.add_empty_row();
         table.add_row(row![hr, red]);
     } else {
         table.add_row(row![
