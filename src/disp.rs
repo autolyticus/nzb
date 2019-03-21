@@ -54,6 +54,32 @@ pub fn print_all() -> Result<(), Box<std::error::Error>> {
     print_tasks_grouped(&all);
     Ok(())
 }
+
+pub fn print_categories(cats: Vec<String>) -> Result<(), Box<std::error::Error>> {
+    let tasks = get_tasks()?;
+    let mut table = prettytable::Table::new();
+    for cat in cats {
+        let cat_tasks = tasks
+            .iter()
+            .filter(|x| x.categories.iter().any(|x| x.eq_ignore_ascii_case(&cat)))
+            .cloned()
+            .collect::<Vec<_>>();
+        table.add_row(row![format!(
+            "{} ({})",
+            cat.to_uppercase(),
+            cat_tasks.iter().len()
+        )]);
+        add_tasks_grouped(&mut table, &cat_tasks);
+    }
+    table.set_format(
+        prettytable::format::FormatBuilder::new()
+            .padding(0, 10)
+            .build(),
+    );
+    table.printstd();
+    Ok(())
+}
+
 pub fn print_debug() -> Result<(), Box<std::error::Error>> {
     let all = get_tasks()?;
     for task in all {

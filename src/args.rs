@@ -22,6 +22,7 @@ Options:
 Commands:
   add <name>                   Add a task to your Nozbe Inbox
   all                          View all of your tasks (This is the default action)
+  cat <category>               View all tasks in a category
   conky                        A conky-friendly, colourful summary of all your tasks
   done                         Mark task(s) as done with fuzzy search
   help                         Show this screen
@@ -46,6 +47,7 @@ pub struct Args {
 pub enum Command {
     Add,
     All,
+    Cat,
     Conky,
     Debug,
     Done,
