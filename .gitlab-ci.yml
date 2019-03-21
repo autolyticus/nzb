@@ -4,7 +4,7 @@ cache:
     - target/
 
 stages:
-  - test
+  # - test
   - build
 
 test:
