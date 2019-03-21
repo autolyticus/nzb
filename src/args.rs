@@ -47,6 +47,7 @@ pub enum Command {
     Add,
     All,
     Conky,
+    Debug,
     Done,
     Help,
     Inbox,

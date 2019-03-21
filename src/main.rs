@@ -33,6 +33,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::Add => nzb::add_task(a.arg_args.join(" "))?,
             args::Command::All => disp::print_all()?,
             args::Command::Conky => disp::print_conky()?,
+            args::Command::Debug => disp::print_debug()?,
             args::Command::Done => {
                 let tasks = nzb::get_tasks()?;
                 nzb::mark_done(tui::picker(

@@ -54,6 +54,13 @@ pub fn print_all() -> Result<(), Box<std::error::Error>> {
     print_tasks_grouped(&all);
     Ok(())
 }
+pub fn print_debug() -> Result<(), Box<std::error::Error>> {
+    let all = get_tasks()?;
+    for task in all {
+        println!("{:#?}", task);
+    }
+    Ok(())
+}
 
 pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
     print_tasks_grouped(
@@ -104,15 +111,15 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
         .iter()
         .cloned()
         .filter(|x| x.project == "2-Next")
-        .filter(|x| !x.categories.contains(&"Side".to_owned()))
+        .filter(|x| x.categories.iter().all(|x| *x != "Side"))
         .filter(|x| x.now == false)
         .collect();
     let side: Vec<_> = all
         .iter()
-        .cloned()
-        .filter(|x| x.project == "2-Next")
-        .filter(|x| x.categories.contains(&"Side".to_owned()))
-        .filter(|x| x.now == false)
+        // .cloned()
+        .filter(|&x| x.project == "2-Next")
+        .filter(|&x| x.categories.iter().any(|x| *x == "Side"))
+        .filter(|&x| x.now == false)
         .collect();
     if !now.is_empty() {
         table.add_row(row![format!("{}{}\t\t1-NOW", yellow, alignc)]);
@@ -126,7 +133,7 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
         ]);
         table.add_empty_row();
     }
-    add_project_to_table(&mut table, "SIDE", &side);
+    add_project_to_table(&mut table, "SIDE", side.as_slice());
     table.add_row(row![blue]);
     add_project_to_table(&mut table, "2-NEXT", &next);
     table.add_row(row![default]);
