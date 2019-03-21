@@ -66,8 +66,8 @@ pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
     print_tasks_grouped(
         &get_tasks()?
             .iter()
-            .cloned()
             .filter(|x| x.project == "Inbox")
+            .cloned()
             .collect::<Vec<_>>(),
     );
     Ok(())
@@ -79,8 +79,8 @@ pub fn print_lists(lists: Vec<String>) -> Result<(), Box<std::error::Error>> {
         print_tasks_grouped(
             &tasks
                 .iter()
-                .cloned()
                 .filter(|x| x.project.eq_ignore_ascii_case(&list))
+                .cloned()
                 .collect::<Vec<_>>(),
         );
     }
@@ -90,8 +90,8 @@ pub fn print_lists(lists: Vec<String>) -> Result<(), Box<std::error::Error>> {
 pub fn print_now() -> Result<(), Box<std::error::Error>> {
     let now = &get_tasks()?
         .iter()
-        .cloned()
         .filter(|x| x.now)
+        .cloned()
         .collect::<Vec<_>>();
     print_tasks_grouped(&now);
     Ok(())
@@ -106,20 +106,20 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
     let alignc = "${alignc}";
     let default = "${color7}";
     let mut table = prettytable::Table::new();
-    let now: Vec<_> = all.iter().cloned().filter(|x| x.now).collect();
+    let now: Vec<_> = all.iter().filter(|x| x.now).cloned().collect();
     let next: Vec<_> = all
         .iter()
-        .cloned()
         .filter(|x| x.project == "2-Next")
         .filter(|x| x.categories.iter().all(|x| *x != "Side"))
         .filter(|x| x.now == false)
+        .cloned()
         .collect();
     let side: Vec<_> = all
         .iter()
-        // .cloned()
-        .filter(|&x| x.project == "2-Next")
-        .filter(|&x| x.categories.iter().any(|x| *x == "Side"))
-        .filter(|&x| x.now == false)
+        .filter(|x| x.project == "2-Next")
+        .filter(|x| x.categories.iter().any(|x| *x == "Side"))
+        .filter(|x| x.now == false)
+        .cloned()
         .collect();
     if !now.is_empty() {
         table.add_row(row![format!("{}{}\t\t1-NOW", yellow, alignc)]);
@@ -133,7 +133,7 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
         ]);
         table.add_empty_row();
     }
-    add_project_to_table(&mut table, "SIDE", side.as_slice());
+    add_project_to_table(&mut table, "SIDE", &side);
     table.add_row(row![blue]);
     add_project_to_table(&mut table, "2-NEXT", &next);
     table.add_row(row![default]);

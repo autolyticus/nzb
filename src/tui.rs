@@ -18,8 +18,8 @@ pub fn picker(
         .query(&query);
     let task_string = tasks
         .iter()
-        .cloned()
         .map(|x| x.name)
+        .cloned()
         .collect::<Vec<_>>()
         .join("\n");
     let selected_items =
@@ -30,8 +30,8 @@ pub fn picker(
         tasks,
         selected_items
             .iter()
-            .cloned()
             .map(|x| x.get_index())
+            .cloned()
             .collect::<Vec<_>>(),
     ))
 }
