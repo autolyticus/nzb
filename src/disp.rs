@@ -158,19 +158,19 @@ pub fn print_conky() -> Result<(), Box<std::error::Error>> {
         .filter(|x| x.now == false)
         .cloned()
         .collect();
-    if !(now.is_empty() || now_side.is_empty()) {
+    if now.is_empty() && now_side.is_empty() {
+        table.add_row(row![
+            "To have tasks show up here, please STAR them to mark them as NOW tasks",
+            red
+        ]);
+        table.add_empty_row();
+    } else {
         table.add_row(row![format!("{}{}\t\t1-NOW", yellow, alignc)]);
         table.add_row(row![hr]);
         add_tasks_grouped(&mut table, &now);
         add_project_to_table(&mut table, "SIDE", &now_side);
         table.add_empty_row();
         table.add_row(row![hr, red]);
-    } else {
-        table.add_row(row![
-            "To have tasks show up here, please STAR them to mark them as NOW tasks",
-            red
-        ]);
-        table.add_empty_row();
     }
     add_project_to_table(&mut table, "SIDE", &side);
     table.add_row(row![blue]);

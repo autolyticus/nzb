@@ -9,6 +9,7 @@ pub fn picker(
     args: Vec<String>,
     prompt: &str,
 ) -> Result<(Vec<Task>, Vec<usize>), Box<std::error::Error>> {
+    println!("Pressing ENTER selects the current task, and also accepts selection");
     let query = args.join("");
     let options = skim::SkimOptions::default()
         .height("10%")
