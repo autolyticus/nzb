@@ -7,11 +7,11 @@ stages:
   # - test
   - build
 
-test:
-  stage: test
-  script:
-    - rustc --version && cargo --version
-    # - cargo test --all --verbose
+# test:
+#   stage: test
+#   script:
+#     - rustc --version && cargo --version
+#     - cargo test --all --verbose
 
 linux-x86_64:
   stage: build
