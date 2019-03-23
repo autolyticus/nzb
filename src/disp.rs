@@ -123,6 +123,30 @@ pub fn print_now() -> Result<(), Box<std::error::Error>> {
     Ok(())
 }
 
+pub fn print_today() -> Result<(), Box<std::error::Error>> {
+    let now = &get_tasks()?
+        .iter()
+        .filter(|x| x.due == "today")
+        .cloned()
+        .collect::<Vec<_>>();
+    print_tasks_grouped(&now);
+    Ok(())
+}
+
+pub fn print_overdue() -> Result<(), Box<std::error::Error>> {
+    use chrono::prelude::*;
+    let now = &get_tasks()?
+        .iter()
+        .filter(|x| {
+            let t = x.get_datetime().unwrap_or(Local::now());
+            t.date() < Local::today()
+        })
+        .cloned()
+        .collect::<Vec<_>>();
+    print_tasks_grouped(&now);
+    Ok(())
+}
+
 pub fn print_conky() -> Result<(), Box<std::error::Error>> {
     let all = get_tasks()?;
     let red = "${color red}";

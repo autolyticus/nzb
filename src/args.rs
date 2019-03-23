@@ -32,7 +32,9 @@ Commands:
   login                        Login to Nozbe
   now | priority | starred     View starred tasks
   open                         Open Nozbe in your browser
+  overdue                      View tasks that are overdue
   star                         Star task(s) with fuzzy search
+  today                        View tasks that are due today
   unstar                       Unstar task(s) with fuzzy search
 ";
 
@@ -58,9 +60,11 @@ pub enum Command {
     Login,
     Now,
     Open,
+    Overdue,
     Priority,
     Star,
     Starred,
+    Today,
     Unstar,
 }
 
@@ -68,7 +72,7 @@ pub fn parse_args() -> Args {
     Docopt::new(USAGE)
         .unwrap_or_else(|e| e.exit())
         .options_first(true)
-        .version(Some("Nzb: A Nozbe client (v0.3.1)".to_owned()))
+        .version(Some("Nzb: A Nozbe client (v0.4.0)".to_owned()))
         .deserialize()
         .unwrap_or_else(|e| e.exit())
 }

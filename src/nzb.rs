@@ -15,6 +15,7 @@ pub struct Task {
     pub completed: bool,
     #[serde(rename = "_datetime_s")]
     pub due: String,
+    pub datetime: Option<String>,
     pub id: String,
     pub name: String,
     // Starred Tasks = Chosen for 1-NOW
@@ -22,6 +23,16 @@ pub struct Task {
     pub now: bool,
     #[serde(rename = "_project_name")]
     pub project: String,
+}
+
+use chrono::prelude::*;
+impl Task {
+    pub fn get_datetime(&self) -> Option<DateTime<Local>> {
+        match &self.datetime {
+            Some(x) => Some(Local.datetime_from_str(&x, "%Y-%m-%d %H:%M:%S").unwrap()),
+            None => None,
+        }
+    }
 }
 
 fn get_file_path() -> std::path::PathBuf {

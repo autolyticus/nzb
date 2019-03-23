@@ -60,6 +60,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::Open => {
                 webbrowser::open("https://app.nozbe.com/")?;
             }
+            args::Command::Overdue => disp::print_overdue()?,
             args::Command::Star => {
                 let tasks = nzb::get_tasks()?;
                 nzb::star(tui::picker(
@@ -68,6 +69,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
                     "Select task(s) to star (Multi-select w/ TAB) >> ",
                 )?)?;
             }
+            args::Command::Today => disp::print_today()?,
             args::Command::Unstar => {
                 let tasks = nzb::get_tasks()?;
                 nzb::unstar(tui::picker(
