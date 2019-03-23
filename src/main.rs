@@ -62,7 +62,11 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             }
             args::Command::Overdue => disp::print_overdue()?,
             args::Command::Star => {
-                let tasks = nzb::get_tasks()?;
+                let tasks = nzb::get_tasks()?
+                    .iter()
+                    .filter(|x| x.now == false)
+                    .cloned()
+                    .collect();
                 nzb::star(tui::picker(
                     tasks,
                     a.arg_args,
@@ -71,7 +75,11 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             }
             args::Command::Today => disp::print_today()?,
             args::Command::Unstar => {
-                let tasks = nzb::get_tasks()?;
+                let tasks = nzb::get_tasks()?
+                    .iter()
+                    .filter(|x| x.now == true)
+                    .cloned()
+                    .collect();
                 nzb::unstar(tui::picker(
                     tasks,
                     a.arg_args,
