@@ -21,6 +21,7 @@ is-it-maintained-open-issues = { repository = "reisub0/nzb" }
 maintenance = { status = "actively-developed" }
 
 [dependencies]
+chrono = { version = "0.4", features = ["serde"] }
 dirs = "^1.0.5"
 docopt = "^1"
 prettytable-rs = "^0.8"
