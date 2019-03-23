@@ -127,6 +127,7 @@ pub fn add_task(name: String) -> Result<(), Box<std::error::Error>> {
         .status()
         .is_success()
     {
+        println!("Added task successfully");
         Ok(())
     } else {
         Err("Status code: Failure. Invalid authentication?")?
@@ -166,6 +167,7 @@ pub fn star((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::er
         .header("Authorization", read_auth_from_file()?.as_str())
         .json(&processed)
         .send()?;
+    println!("{} tasks starred", tasks.len());
     Ok(())
 }
 
@@ -187,6 +189,7 @@ pub fn unstar((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::
         .header("Authorization", read_auth_from_file()?.as_str())
         .json(&processed)
         .send()?;
+    println!("{} tasks unstarred", tasks.len());
     Ok(())
 }
 
@@ -208,6 +211,7 @@ pub fn mark_done((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<st
         .header("Authorization", read_auth_from_file()?.as_str())
         .json(&processed)
         .send()?;
+    println!("{} tasks marked as done", tasks.len());
     Ok(())
 }
 

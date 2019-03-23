@@ -40,6 +40,10 @@ fn add_tasks_grouped(table: &mut prettytable::Table, tasks: &[Task]) {
 
 fn print_tasks_grouped(tasks: &[Task]) {
     let mut table = prettytable::Table::new();
+    if tasks.is_empty() {
+        println!("No tasks match the specified filter");
+        return;
+    }
     add_tasks_grouped(&mut table, &tasks);
     table.set_format(
         prettytable::format::FormatBuilder::new()
