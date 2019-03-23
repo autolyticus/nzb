@@ -167,7 +167,7 @@ pub fn star((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::er
         .header("Authorization", read_auth_from_file()?.as_str())
         .json(&processed)
         .send()?;
-    println!("{} tasks starred", tasks.len());
+    println!("{} tasks starred", indices.len());
     Ok(())
 }
 
@@ -189,7 +189,7 @@ pub fn unstar((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<std::
         .header("Authorization", read_auth_from_file()?.as_str())
         .json(&processed)
         .send()?;
-    println!("{} tasks unstarred", tasks.len());
+    println!("{} tasks unstarred", indices.len());
     Ok(())
 }
 
@@ -211,7 +211,7 @@ pub fn mark_done((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<st
         .header("Authorization", read_auth_from_file()?.as_str())
         .json(&processed)
         .send()?;
-    println!("{} tasks marked as done", tasks.len());
+    println!("{} tasks marked as done", indices.len());
     Ok(())
 }
 
