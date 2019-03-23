@@ -14,6 +14,7 @@ The core functionality of the excellent [Wunderline](https://github.com/wayneash
 
 Nozbe has pretty good apps for web, desktop and mobile. However, I found all these quite lacking in terms of speed and usability. The overhead of switching between my projects to find the certain task I wanted to mark as done was a bit too much to handle. So I took some inspiration from the Wunderline app, and made this!
 
+
 ## Features
 
 - Extremely usable interface
@@ -29,6 +30,7 @@ Nozbe has pretty good apps for web, desktop and mobile. However, I found all the
 
 
 ![nzb-conky-screenshot-of-desktop](https://user-images.githubusercontent.com/25099244/54476743-e2a60900-4826-11e9-8085-19a6d6e35d23.png)
+
 
 ## Usage
 
@@ -50,6 +52,7 @@ Options:
 Commands:
   add <name>                   Add a task to your Nozbe Inbox
   all                          View all of your tasks (This is the default action)
+  cat <category>               View all tasks in a category
   conky                        A conky-friendly, colourful summary of all your tasks
   done                         Mark task(s) as done with fuzzy search
   help                         Show this screen
@@ -59,7 +62,9 @@ Commands:
   login                        Login to Nozbe
   now | priority | starred     View starred tasks
   open                         Open Nozbe in your browser
+  overdue                      View tasks that are overdue
   star                         Star task(s) with fuzzy search
+  today                        View tasks that are due today
   unstar                       Unstar task(s) with fuzzy search
 ```
 
@@ -90,7 +95,6 @@ ${texecpi 60 nzb conky}
 where 60 is how often(in seconds) you want the view to be updated.
 
 
-
 ## Installation
 
 ### From Binaries
@@ -104,19 +108,13 @@ Note: Currently only **`linux-x86_64`** is supported: macOS users can install fr
 ```bash
 cargo install nzb
 ```
+
 ### From Source
 
 ```bash
 git clone https://gitlab.com/reisub0/nzb
 cargo install --path nzb
 ```
-
-
-
-## WIP:
-
-1. Filter tasks by time (View tasks that are due today, overdue etc)
-
 
 
 ## License
