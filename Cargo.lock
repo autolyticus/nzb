@@ -663,7 +663,7 @@ dependencies = [
 
 [[package]]
 name = "nzb"
-version = "0.4.1"
+version = "0.4.2"
 dependencies = [
  "chrono 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "dirs 1.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
