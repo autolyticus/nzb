@@ -105,12 +105,10 @@ Note: Currently only **`linux-x86_64`** is supported: macOS users can install fr
 
 ### Arch Linux (From AUR)
 
-Use your favourite AUR Helper and install `nzb-bin`
+Use your favourite AUR Helper and install [`nzb-bin`](https://aur.archlinux.org/packages/nzb-bin/)
 ```bash
 yay -S nzb-bin
 ```
-Advanced users can find the AUR package here: [`nzb-bin`](https://aur.archlinux.org/packages/nzb-bin/)
-
 ### From Crates.io
 
 ```bash
