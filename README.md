@@ -103,6 +103,14 @@ Binary releases can be found at the [Releases](https://gitlab.com/reisub0/nzb/ta
 
 Note: Currently only **`linux-x86_64`** is supported: macOS users can install from `cargo` or from source; support for Windows is unlikely due to a dependency on `termion`. PRs are highly appreciated for getting it working on Windows.
 
+### Arch Linux (From AUR)
+
+Use your favourite AUR Helper and install `nzb-bin`
+```bash
+yay -S nzb-bin
+```
+Advanced users can find the AUR package here: [`nzb-bin`](https://aur.archlinux.org/packages/nzb-bin/)
+
 ### From Crates.io
 
 ```bash
