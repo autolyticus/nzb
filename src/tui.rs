@@ -1,11 +1,11 @@
 //
-// ui.rs
+// tui.rs
 // Copyright (C) 2019 g <g@ABCL>
 // Distributed under terms of the MIT license.
 //
-use super::nzb::Task;
+use super::nzb::*;
 
-pub fn picker(
+pub fn task_picker(
     tasks: Vec<Task>,
     args: Vec<String>,
     prompt: &str,
