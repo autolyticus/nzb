@@ -91,6 +91,7 @@ pub fn print_categories(cats: Vec<String>) -> Result<(), Box<std::error::Error>>
     Ok(())
 }
 
+/// Prints the special Inbox list (The default destination for added tasks)
 pub fn print_debug() -> Result<(), Box<std::error::Error>> {
     let all = get_tasks()?;
     for task in all {
@@ -99,6 +100,7 @@ pub fn print_debug() -> Result<(), Box<std::error::Error>> {
     Ok(())
 }
 
+/// Prints the special Inbox list (The default destination for added tasks)
 pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
     print_tasks_grouped(
         &get_tasks()?
@@ -110,6 +112,7 @@ pub fn print_inbox() -> Result<(), Box<std::error::Error>> {
     Ok(())
 }
 
+/// Prints lists(projects in Nozbe)
 pub fn print_lists(lists: Vec<String>) -> Result<(), Box<std::error::Error>> {
     let tasks = get_tasks()?;
     for list in lists {
@@ -124,6 +127,7 @@ pub fn print_lists(lists: Vec<String>) -> Result<(), Box<std::error::Error>> {
     Ok(())
 }
 
+/// Prints tasks that are starred
 pub fn print_now() -> Result<(), Box<std::error::Error>> {
     let now = &get_tasks()?
         .iter()
@@ -134,6 +138,7 @@ pub fn print_now() -> Result<(), Box<std::error::Error>> {
     Ok(())
 }
 
+/// Prints tasks that are due today
 pub fn print_today() -> Result<(), Box<std::error::Error>> {
     let now = &get_tasks()?
         .iter()
@@ -144,6 +149,7 @@ pub fn print_today() -> Result<(), Box<std::error::Error>> {
     Ok(())
 }
 
+/// Prints tasks that are overdue (Due date < today)
 pub fn print_overdue() -> Result<(), Box<std::error::Error>> {
     use chrono::prelude::*;
     let now = &get_tasks()?
