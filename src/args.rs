@@ -28,7 +28,7 @@ Commands:
   help                         Show this screen
   inbox                        View your inbox
   link <link>                  Add a link to your inbox (adds a comment with link)
-  list [<list>...]             Show specific lists
+  list [<list>...]             Show specific lists (projects)
   login                        Login to Nozbe
   now | priority | starred     View starred tasks
   open                         Open Nozbe in your browser
