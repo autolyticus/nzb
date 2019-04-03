@@ -4,6 +4,7 @@
 // Distributed under terms of the MIT license.
 //
 use super::nzb::Task;
+
 pub fn picker(
     tasks: Vec<Task>,
     args: Vec<String>,
