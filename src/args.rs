@@ -30,6 +30,7 @@ Commands:
   link <link>                  Add a link to your inbox (adds a comment with link)
   list [<list>...]             Show specific lists (projects)
   login                        Login to Nozbe
+  mv                           Move tasks between projects
   now | priority | starred     View starred tasks
   open                         Open Nozbe in your browser
   overdue                      View tasks that are overdue
@@ -58,6 +59,7 @@ pub enum Command {
     Link,
     List,
     Login,
+    Mv,
     Now,
     Open,
     Overdue,
