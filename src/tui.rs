@@ -93,9 +93,20 @@ pub fn mv() -> Result<(), Box<std::error::Error>> {
         vec![],
         "Select task(s) to move (Multi-select w/ TAB) >> ",
     )?;
+
+    if task_indices.len() == 0 {
+        println!("No tasks selected!");
+        std::process::exit(0);
+    }
+
     let projects = rx.recv()?;
     let (projects, project_indices) =
         project_picker(projects, vec![], "Select project to move to >> ")?;
+
+    if project_indices.len() == 0 {
+        println!("No project selected!");
+        std::process::exit(0);
+    }
     move_to_project((
         tasks,
         task_indices.clone(),
