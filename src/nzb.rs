@@ -215,6 +215,35 @@ pub fn mark_done((tasks, indices): (Vec<Task>, Vec<usize>)) -> Result<(), Box<st
     Ok(())
 }
 
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub struct Project {
+    pub id: String,
+    pub name: String,
+}
+
+pub fn move_to_project(
+    (tasks, indices, project_id): (Vec<Task>, Vec<usize>, &str),
+) -> Result<(), Box<std::error::Error>> {
+    if indices.is_empty() {
+        return Ok(());
+    }
+    let processed: Vec<_> = indices
+        .iter()
+        .map(|&index| {
+            json!({
+                "id": tasks[index].id,
+                "project_id": project_id
+            })
+        })
+        .collect();
+    reqwest::Client::new()
+        .put(&format!("{}/json/task", URL))
+        .header("Authorization", read_auth_from_file()?.as_str())
+        .json(&processed)
+        .send()?;
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
