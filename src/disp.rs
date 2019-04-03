@@ -59,22 +59,29 @@ pub fn print_all() -> Result<(), Box<std::error::Error>> {
     Ok(())
 }
 
+/// Prints tasks that are in the intersection of all the given categories
+/// You can specify !<cat> for excluding a category
 pub fn print_categories(cats: Vec<String>) -> Result<(), Box<std::error::Error>> {
     let tasks = get_tasks()?;
     let mut table = prettytable::Table::new();
+    let mut cat_tasks = tasks;
     for cat in cats {
-        let cat_tasks = tasks
-            .iter()
-            .filter(|x| x.categories.iter().any(|x| x.eq_ignore_ascii_case(&cat)))
-            .cloned()
-            .collect::<Vec<_>>();
-        table.add_row(row![format!(
-            "{} ({})",
-            cat.to_uppercase(),
-            cat_tasks.iter().len()
-        )]);
-        add_tasks_grouped(&mut table, &cat_tasks);
+        if cat.starts_with("!") {
+            let cat = cat.trim_start_matches('!');
+            cat_tasks = cat_tasks
+                .iter()
+                .filter(|x| x.categories.iter().all(|x| !x.eq_ignore_ascii_case(&cat)))
+                .cloned()
+                .collect::<Vec<_>>();
+        } else {
+            cat_tasks = cat_tasks
+                .iter()
+                .filter(|x| x.categories.iter().any(|x| x.eq_ignore_ascii_case(&cat)))
+                .cloned()
+                .collect::<Vec<_>>();
+        }
     }
+    add_tasks_grouped(&mut table, &cat_tasks);
     table.set_format(
         prettytable::format::FormatBuilder::new()
             .padding(0, 10)
