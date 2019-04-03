@@ -33,7 +33,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             args::Command::Debug => disp::print_debug()?,
             args::Command::Done => {
                 let tasks = nzb::get_tasks()?;
-                nzb::mark_done(tui::picker(
+                nzb::mark_done(tui::task_picker(
                     tasks,
                     a.arg_args,
                     "Select task(s) to mark as done (Multi-select w/ TAB) >> ",
@@ -63,7 +63,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
                     .filter(|x| x.now == false)
                     .cloned()
                     .collect();
-                nzb::star(tui::picker(
+                nzb::star(tui::task_picker(
                     tasks,
                     a.arg_args,
                     "Select task(s) to star (Multi-select w/ TAB) >> ",
@@ -76,7 +76,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
                     .filter(|x| x.now == true)
                     .cloned()
                     .collect();
-                nzb::unstar(tui::picker(
+                nzb::unstar(tui::task_picker(
                     tasks,
                     a.arg_args,
                     "Select task(s) to unstar (Multi-select w/ TAB) >> ",
