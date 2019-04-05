@@ -8,18 +8,18 @@ use docopt::Docopt;
 
 const USAGE: &'static str = "Nozbe front-end written in Rust.
 
-Usage:
+USAGE:
   nzb [options] [<command> [<args>...]]
   nzb -h | --help
   nzb --version
 
-Options:
-  -a <token> --auth=<token>    Specify an alternate Nozbe authentication token (Refer Nozbe API Documentation)
+OPTIONS:
+  -a <token> --auth=<token>    Specify an alternate 40-character Nozbe authentication token (Refer Nozbe API Documentation)
                                (Note: The default authentication token is at $HOME/.local/.nozbe_token)
   -h --help                    Show this screen
   -V --version                 Show version
 
-Commands:
+COMMANDS:
   add <name>                   Add a task to your Nozbe Inbox
   all                          View all of your tasks (This is the default action)
   cat <category>               View all tasks in a category
@@ -74,7 +74,7 @@ pub fn parse_args() -> Args {
     Docopt::new(USAGE)
         .unwrap_or_else(|e| e.exit())
         .options_first(true)
-        .version(Some("Nzb: A Nozbe client (v0.5.1)".to_owned()))
+        .version(Some("nzb - A Nozbe Client (v0.5.1)".to_owned()))
         .deserialize()
         .unwrap_or_else(|e| e.exit())
 }
