@@ -18,7 +18,7 @@ fn add_project_to_table(table: &mut prettytable::Table, project: &str, tasks: &[
                     format!("[{}]", task.due)
                 }
             ),
-            if task.now { "★" } else { "☆" }
+            if task.now { "★" } else { " " }
         ]);
     }
 }
