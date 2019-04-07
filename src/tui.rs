@@ -84,7 +84,6 @@ pub fn mv() -> Result<(), Box<std::error::Error>> {
                 .json::<Vec<Project>>()
                 .expect("Failure parsing json"),
         )
-        .unwrap();
     });
 
     let tasks = get_tasks()?;
