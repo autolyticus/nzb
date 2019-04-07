@@ -26,7 +26,13 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
     }
     if let Some(x) = a.arg_command {
         match x {
-            args::Command::Add => nzb::add_task(a.arg_args.join(" "))?,
+            args::Command::Add => {
+                if a.arg_args.len() == 0 {
+                    println!("Please enter a task name!");
+                    std::process::exit(0);
+                }
+                nzb::add_task(a.arg_args.join(" "))?
+            }
             args::Command::All => disp::print_all()?,
             args::Command::Cat => disp::print_categories(a.arg_args)?,
             args::Command::Conky => disp::print_conky()?,
@@ -41,7 +47,13 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
             }
             args::Command::Help => args::print_help(),
             args::Command::Inbox => disp::print_inbox()?,
-            args::Command::Link => nzb::add_link(a.arg_args.join(" "))?,
+            args::Command::Link => {
+                if a.arg_args.len() == 0 {
+                    println!("Please enter a link!");
+                    std::process::exit(0);
+                }
+                nzb::add_link(a.arg_args.join(" "))?
+            }
             args::Command::List => {
                 if a.arg_args.is_empty() {
                     disp::print_all()?
