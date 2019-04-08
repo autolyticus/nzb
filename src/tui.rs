@@ -10,9 +10,12 @@ pub fn task_picker(
     args: Vec<String>,
     prompt: &str,
 ) -> Result<(Vec<Task>, Vec<usize>), Box<std::error::Error>> {
-    println!("Pressing ENTER selects the current task, and also accepts selection");
+    println!("Keys");
+    println!("TAB - Toggles task under cursor");
+    println!("ENTER - Selects current task and accepts");
     let query = args.join("");
     let options = skim::SkimOptions::default()
+        .bind(vec!["tab:toggle", "shift-tab:toggle"])
         .height("10%")
         .multi(true)
         .prompt(prompt)
