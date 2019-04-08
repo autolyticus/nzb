@@ -70,17 +70,9 @@ pub fn write_auth_into_file(auth: &str) -> Result<(), Box<std::error::Error>> {
     if auth.len() != 41 {
         return Err("Invalid access token")?;
     }
-    use std::error::Error;
     use std::fs::File;
     use std::io::prelude::*;
-    let mut file = match File::create(get_file_path()) {
-        Err(why) => panic!(
-            "couldn't create {}: {}",
-            get_file_path().display(),
-            why.description()
-        ),
-        Ok(file) => file,
-    };
+    let mut file = File::create(get_file_path())?;
     file.write_fmt(format_args!("{}", auth))?;
     Ok(())
 }
