@@ -62,6 +62,7 @@ pub fn main() -> Result<(), Box<std::error::Error>> {
                 }
             }
             args::Command::Login => nzb::make_auth_token()?,
+            args::Command::Move => tui::mv()?,
             args::Command::Mv => tui::mv()?,
             args::Command::Now | args::Command::Priority | args::Command::Starred => {
                 disp::print_now()?
